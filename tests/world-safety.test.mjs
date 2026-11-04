@@ -24,4 +24,8 @@ test("containers and critical blocks are protected from terrain replacement",()=
  op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1});
  assert.equal(target.typeId,"minecraft:chest");assert.ok(isProtectedType("minecraft:command_block"));assert.ok(isProtectedType("minecraft:red_shulker_box"));
 });
+test("journal write failure immediately rolls back temporary edits",()=>{
+ const target=block("minecraft:stone"),journal={canFit(){return true;},add(){throw new Error("storage full");}},op=new EventOperations({}, {terrainDestruction:true},{},journal);
+ assert.throws(()=>op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1}),/storage full/);assert.equal(target.typeId,"minecraft:stone");
+});
 test("restoration requires the event block to still be present",()=>{assert.equal(canRestoreTerrain("minecraft:stone","minecraft:cobweb"),false);});

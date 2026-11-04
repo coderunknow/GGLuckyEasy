@@ -1,4 +1,4 @@
-import { world, system, PlayerPermissionLevel } from "@minecraft/server";
+import { world, system, ItemStack, PlayerPermissionLevel } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import { EVENTS } from "./events/registry.js";
 import probabilityTable from "./config/probabilities.js";
@@ -154,7 +154,10 @@ world.afterEvents.entityDie.subscribe(event => {
   const boss = bossTracker.consumeDeath(event.deadEntity.id); if (!boss) return;
   const opener = world.getAllPlayers().find(p => p.id === boss.opener);
   if (opener) { operations.give(opener, boss.reward, boss.count); text(opener, "luckychaos.boss.reward"); }
-  else bossTracker.defer(boss.opener, boss);
+  else if (!bossTracker.defer(boss.opener, boss)) {
+    // Preserve an overflowing offline reward in the world rather than deleting it.
+    event.deadEntity.dimension.spawnItem(new ItemStack(boss.reward, boss.count), event.deadEntity.location);
+  }
 });
 function deliverPendingRewards(player) {
   const rewards = bossTracker.takePending(player.id), delivered = [];

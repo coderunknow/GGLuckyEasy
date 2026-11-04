@@ -31,6 +31,13 @@ test("unknown entity deaths cannot consume or duplicate another reward", () => {
   const store = storage(), tracker = new BossTracker(store.read, store.write);
   assert.equal(tracker.consumeDeath("unknown"), undefined);
 });
+test("capacity never evicts an older boss or silently drops an offline reward",()=>{
+ const store=storage(),tracker=new BossTracker(store.read,store.write);
+ for(let i=0;i<64;i++)tracker.track(`entity-${i}`,reward);
+ assert.throws(()=>tracker.track("overflow",reward),/full/);assert.equal(tracker.active.has("entity-0"),true);
+ for(let i=0;i<32;i++)tracker.defer("player-A",reward);
+ assert.equal(tracker.defer("player-A",reward),false);assert.equal(tracker.pending["player-A"].length,32);
+});
 test("corrupt persisted boss data is bounded and sanitized", () => {
   const store = storage(JSON.stringify({active:{bad:{count:-9},good:reward},pending:{"player-A":[null,reward,"bad"]}}));
   const tracker = new BossTracker(store.read, store.write);

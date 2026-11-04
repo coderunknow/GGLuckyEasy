@@ -15,16 +15,21 @@ export class EventOperations {
     this.settings = settings;
     this.bossTracker = bossTracker;
     this.terrainJournal = terrainJournal;
+    this.terrainSequence = 0;
   }
 
   scheduleTerrainRestore(ctx, changes, eventType, ticks) {
     const records = changes.map(([block, permutation], index) => ({
-      id: `${ctx.dimension.id}:${block.location.x},${block.location.y},${block.location.z}:${Date.now()}:${index}`,
+      id: `${ctx.dimension.id}:${block.location.x},${block.location.y},${block.location.z}:${Date.now()}:${this.terrainSequence++}:${index}`,
       dimension: ctx.dimension.id, location: block.location, eventType,
       oldType: permutation.type.id, oldStates: permutation.getAllStates()
     }));
     if (this.terrainJournal && !this.terrainJournal.canFit(records.length)) throw new Error("Too many concurrent temporary terrain events");
-    this.terrainJournal?.add(records);
+    try { this.terrainJournal?.add(records); }
+    catch (error) {
+      for (const [block, old] of changes) if (block.isValid && canRestoreTerrain(block.typeId, eventType)) restore(block, old);
+      throw error;
+    }
     const restoreAll = () => {
       const completed = [];
       for (let i = 0; i < changes.length; i++) {
@@ -211,6 +216,7 @@ export class EventOperations {
 
   boss(ctx, d) {
     if (d.dangerous && !this.settings.terrainDestruction) { this.spawn(ctx, { entity: "minecraft:iron_golem", name: "Safety Golem", count: 1 }); return; }
+    if (this.bossTracker.active?.size >= 64) throw new Error("Active boss limit reached");
     const entity = ctx.dimension.spawnEntity(d.entity, above(ctx.location, 2));
     entity.nameTag = `☠ ${d.name} ☠`;
     if (d.entity === "minecraft:slime" && d.size >= 3) entity.triggerEvent("spawn_large");

@@ -26,7 +26,7 @@ export class BossTracker {
   save() { this.write(encodeState({ version: 1, active: Object.fromEntries(this.active), pending: this.pending })); }
   track(entityId, reward) {
     const valid = cleanReward(reward); if (!valid) throw new Error("Invalid boss reward");
-    if (this.active.size >= 64) this.active.delete(this.active.keys().next().value);
+    if (this.active.size >= 64 && !this.active.has(entityId)) throw new Error("Active boss journal is full");
     this.active.set(entityId, valid); this.save();
   }
   consumeDeath(entityId) {
@@ -36,7 +36,8 @@ export class BossTracker {
   defer(playerId, reward) {
     const valid = cleanReward({ ...reward, opener: playerId }); if (!valid) return;
     const queue = this.pending[playerId] ?? [];
-    queue.push(valid); this.pending[playerId] = queue.slice(-32); this.save();
+    if (queue.length >= 32) return false;
+    queue.push(valid); this.pending[playerId] = queue; this.save(); return true;
   }
   takePending(playerId) {
     const rewards = this.pending[playerId] ?? [];
