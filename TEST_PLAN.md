@@ -90,3 +90,7 @@ Static budgets implemented: no perpetual tick loop, no ticking areas, 160-cell s
 ## CI and final regression
 
 GitHub Actions runs `npm ci --ignore-scripts` and `npm run audit` on the exact PR head. CI and final-revision results must be recorded after push. All available tests must be rerun after meaningful changes. Review is unavailable unless a real configured provider reports it; no review command is invented.
+
+## Hosted CI and review result
+
+PR #1: GitHub Actions `audit` run `41776709937` completed **SUCCESS** on head `3241e9ea4f3831a1432ed10916fe613f4d02c3e7`. A final run is required after this documentation update. External review did not complete: CodeRabbit SKIPPED (repository auto-review policy), Kilo/Codex RATE-LIMITED (credits), and Copilot RATE-LIMITED (quota). These are not completed reviews and supplied no code findings.

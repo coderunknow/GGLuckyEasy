@@ -13,4 +13,4 @@ Date: 2026-11-04. Scope: complete working tree immediately before the developmen
 
 Final local command: `npm run audit` — static validation PASSED, API typecheck PASSED, 110/110 tests PASSED, probability checks PASSED, build/CRC/hash checks PASSED. See `evidence/final-local-audit.log`.
 
-External review: no configured CodeRabbit/reviewer integration was found; none is claimed. Real Bedrock/mobile/multiplayer gates remain BLOCKED, so release is not authorized.
+External review: CodeRabbit skipped; Kilo/Codex/Copilot were quota-limited. No completed external review is claimed. Hosted CI audit passed on the initial PR head; the final head is rerun after documentation synchronization. Real Bedrock/mobile/multiplayer gates remain BLOCKED, so release is not authorized.

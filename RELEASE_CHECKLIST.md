@@ -18,9 +18,9 @@ A missing test is not a pass. Automated source/package checks do not substitute 
 | 12 | Critical multiplayer tests pass | BLOCKED | No two Bedrock clients available |
 | 13 | No unresolved critical/high defects | BLOCKED | Runtime defects cannot be excluded without device tests; F-006 open |
 | 14 | Required compatibility checks pass | BLOCKED | Official stable versions verified; retail/Android/iOS/BlueStacks unverified |
-| 15 | CI passes | IN PROGRESS | Workflow added; must run on final PR head |
+| 15 | CI passes | PASSED (PR #1 audit) | GitHub Actions `audit` passed; final documentation-head run must also pass |
 | 16 | Final source revision audited | PASSED (local final tree) | Full `npm run audit`, source scans, API typecheck, and archive inspection passed |
-| 17 | Required review findings resolved | NOT APPLICABLE (external) / PASSED (self-review) | No configured external reviewer; substantive self-review findings F-004/F-007 fixed and retested |
+| 17 | Required review findings resolved | NOT APPLICABLE (external unavailable) / PASSED (self-review) | CodeRabbit skipped; Kilo/Codex/Copilot quota-limited; no code findings supplied. Self-review F-004/F-007 fixed |
 | 18 | Actual release artifacts verified | PARTIALLY VERIFIED | ZIP structure/CRC/hash verified; import and device artifacts unverified |
 
 ## Release decision
