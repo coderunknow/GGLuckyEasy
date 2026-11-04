@@ -1,6 +1,6 @@
 # Comprehensive Local Source Audit — GGLuckyEasy v0.1.0-dev1
 
-Date: 2026-11-04. Baseline: `b30d57824255615f7aaae13e9f6466a38bff061c`; final SHA recorded after commit/CI.
+Date: 2026-11-04. Baseline: `b30d57824255615f7aaae13e9f6466a38bff061c`. Current validation status: PASS on the checked-in tree; the exact commit SHA is recorded in post-commit CI evidence.
 
 ## Findings and remediation
 

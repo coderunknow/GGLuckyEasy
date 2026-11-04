@@ -49,7 +49,8 @@ Custom creature/boss/vehicle geometry was evaluated but not added: vanilla model
 - CodeRabbit remediation full review on `6ee57c96c3a4643bb67104de55a7730c9e13984a`: FINISHED; 11 findings addressed.
 - CodeRabbit final-candidate full review on `18d6e1a8506dca64fffcbb20ebc5e1c8a19a550e`: FINISHED; 9 findings addressed.
 - CodeRabbit consolidated review on `d2a642918bdb63bed256311b0097ed60ff0915b5`: FINISHED; 6 findings addressed.
-- Final release-head review: required after this push and recorded in `evidence/review-status.json`.
+- CodeRabbit release-head review on `1425baf84d8c1cb689c0845ec9a1996a92dd2482`: FINISHED; 8 findings addressed.
+- Final publication-candidate review: required after this push and recorded in `evidence/review-status.json`.
 - Kilo/Codex/Copilot: quota-limited; no completed findings claimed.
 
 Raw review data is preserved in `evidence/coderabbit-*.json`.

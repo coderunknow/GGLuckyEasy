@@ -133,7 +133,7 @@ export class EventOperations {
     }
     if (d.item) this.give(ctx.player, d.item, 1);
   }
-  vehicleLoot(ctx, d) { this.vehicle(ctx, d); this.give(ctx.player, d.item, d.count); }
+  vehicleLoot(ctx, d) { this.vehicle(ctx, { ...d, item: undefined }); this.give(ctx.player, d.item, d.count); }
 
   fallingBlock(ctx, d) {
     const loc = above(ctx.location, d.height);
@@ -236,7 +236,7 @@ export class EventOperations {
     if (health) {
       const extra = Math.max(0, d.health - health.effectiveMax);
       if (extra > 0) entity.addEffect("health_boost", 999999, { amplifier: Math.min(49, Math.ceil(extra / 4) - 1), showParticles: false });
-      health.resetToMaxValue(); health.setCurrent(Math.min(d.health, health.effectiveMax));
+      health.resetToMaxValue(); health.setCurrentValue(Math.min(d.health, health.effectiveMax));
     }
     entity.addEffect("resistance", 999999, { amplifier: 1, showParticles: false });
     if (d.effect) entity.addEffect(d.effect, 999999, { amplifier: 1 });

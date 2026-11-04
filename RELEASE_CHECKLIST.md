@@ -20,7 +20,7 @@ Statuses preserve the difference between automated evidence and unavailable reta
 | 14 | Stable compatibility checks | PASS (declarations/docs) / UNVERIFIED (device) | 1.26.30; server 2.8.0; UI 2.1.0; no experiments |
 | 15 | CI on final PR head | IN PROGRESS | Must pass after remediation push |
 | 16 | Final source audit | PASS | 134 tests, typecheck, distribution, semantic archive, two-build comparison, npm audit, source review |
-| 17 | Current-head CodeRabbit review and findings | IN PROGRESS | 41 findings across four completed full reviews addressed; new consolidated head requires review |
+| 17 | Current-head CodeRabbit review and findings | IN PROGRESS | 49 findings across five completed full reviews addressed; new consolidated head requires review |
 | 18 | Actual release artifacts verified | PASS (static) / UNVERIFIED (import) | Final names/hashes/semantic archive checks; real import unavailable |
 | 19 | Post-merge CI and final-commit artifact rebuild | NOT STARTED | Required after PR merge |
 | 20 | Published assets match local SHA-256 | NOT STARTED | Required after prerelease upload |

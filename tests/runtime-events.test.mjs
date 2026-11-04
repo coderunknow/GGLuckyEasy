@@ -16,7 +16,7 @@ const {EventOperations}=await import(`data:text/javascript;base64,${Buffer.from(
 function fixture(){
  const spawned=[],given=[],effects=[],blocks=[],actions=[];
  const container={addItem(item){given.push(item);return undefined;}};
- const entity=id=>({id,nameTag:"",addEffect(){},triggerEvent(){},addItem(){},getComponent(id){return id==="minecraft:health"?{effectiveMax:500,resetToMaxValue(){},setCurrent(){}}:undefined;}});
+ const entity=id=>({id,nameTag:"",addEffect(){},triggerEvent(){},addItem(){},getComponent(id){return id==="minecraft:health"?{effectiveMax:500,resetToMaxValue(){},setCurrentValue(){}}:undefined;}});
  const dimension={
   heightRange:{min:-64,max:320},spawned,
   spawnEntity(id,location){const e=entity(id);e.typeId=id;e.location=location;spawned.push(e);return e;},

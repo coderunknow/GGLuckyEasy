@@ -1,4 +1,4 @@
-# GGLuckyEasy — GGLuckyEasy
+# GGLuckyEasy
 
 **Version:** `v0.1.0-dev1` · **Minecraft Bedrock:** retail 1.26.30 (“26.3”) · **Android/iOS, two-player friendly**
 
@@ -92,7 +92,7 @@ Actual two-client synchronization remains **UNVERIFIED** until the procedure in 
 
 ## Troubleshooting
 
-- **Pack will not activate:** confirm Minecraft is 1.26.30 or newer and both packs imported. Remove older duplicate GGLuckyEasy packs before reimporting.
+- **Pack will not activate:** confirm Minecraft is 1.26.30 and both packs imported. Remove older duplicate GGLuckyEasy packs before reimporting.
 - **Compass/menu does not work:** verify the Behavior Pack is active and scripts were not blocked by the world/host settings. No Beta APIs toggle is needed.
 - **Block does nothing:** report the tier, coordinates, outcome attempt, and content-log error. A failed event is isolated and should not disable later blocks.
 - **Vietnamese text looks wrong:** select `vi_VN` (Tiếng Việt) in Minecraft language settings; the pack registers this custom language name and English is the fallback. The source language files are UTF-8.

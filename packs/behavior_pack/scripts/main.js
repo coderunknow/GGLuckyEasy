@@ -72,7 +72,7 @@ function activate(player, dimension, location, tier) {
     // Co-op grants a smaller, separately persisted discovery XP reward to one nearby partner.
     if (settings.profile === "coop") {
       const partner = world.getAllPlayers().find(p => p.id !== player.id && p.dimension.id === dimension.id && Math.hypot(p.location.x - location.x, p.location.y - location.y, p.location.z - location.z) <= 12);
-      if (partner) { const partnerState = getProgress(partner); saveProgress(partner, discover(partnerState, event, 4).state); text(partner, "luckychaos.message.coop_xp"); }
+      if (partner) { const partnerState = getProgress(partner), assist = discover(partnerState, event, 4); saveProgress(partner, assist.state); text(partner, "luckychaos.message.coop_xp", [String(assist.xp)]); }
     }
     if (current.skills.fortune > 0 && random() < current.skills.fortune * .08) operations.give(player, "minecraft:emerald", 1);
     if (current.skills.vitality > 0) player.addEffect("absorption", 300 * 20, { amplifier: current.skills.vitality - 1 });

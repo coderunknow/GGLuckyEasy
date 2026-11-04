@@ -31,6 +31,7 @@ for(const file of walk("packs/behavior_pack/items").filter(f=>f.endsWith(".json"
 if(!fs.existsSync("packs/resource_pack/texts/language_names.json"))errors.push("Missing custom language names");
 pass("Block geometry, item display names, and custom language registration");
 try {
+  if(table.total!==10000)throw new Error("Probability basis-point total must be 10000");
   if(!["lucky","super","chaos"].every(tier=>table.tiers?.[tier]&&typeof table.tiers[tier]==="object"))throw new Error("All lucky, super, and chaos tiers are required");
   validateWeights(EVENTS,table);
   if(JSON.stringify(runtimeTable)!==JSON.stringify(table))errors.push("Runtime probability table is stale; run npm run build");

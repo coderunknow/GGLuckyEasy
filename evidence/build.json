@@ -3,18 +3,18 @@
   "archives": [
     {
       "file": "GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack",
-      "bytes": 29466,
-      "sha256": "92e0ef3cc0af5fccb9bad4d141b3264d0447b38fbcf12cb54952387329528d58"
+      "bytes": 29496,
+      "sha256": "a800b771e9409a1e3d7fefca342a5b5c4e9b71bb6f92622bacea2d7b95992081"
     },
     {
       "file": "GGLuckyEasy-Resources-v0.1.0-dev1.mcpack",
       "bytes": 30022,
-      "sha256": "e1da8dc1230e5712a8a0fbb8c509991a1dddcb10ce0dc31fa92b2efcc6285f52"
+      "sha256": "f45ec708d6851dfb72af962951a941e5ef139e5c1066ad7bb05f6a711edce361"
     },
     {
       "file": "GGLuckyEasy-v0.1.0-dev1.mcaddon",
-      "bytes": 55729,
-      "sha256": "74ff4ea3a86df6e41b33d7b73518e4ba306f59f46a124c57c9bf84e64fc19de5"
+      "bytes": 55762,
+      "sha256": "d5fb08e5ca8f7e3fc43f401df79809b2595c03d887531a8ec5a97a82ac2e7c7e"
     }
   ],
   "mcaddon_entries": [

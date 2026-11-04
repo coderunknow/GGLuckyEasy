@@ -137,3 +137,11 @@ Append-only. Resolved failures remain recorded.
 - **Fix:** persisted tick-matched deadlines, missing-target guards, stable `permutation` property and corrected mocks, output bitexact encoder flags with two-run hash comparison, required ID validation, and explicit pre/post-release gates.
 - **Regression:** 134/134 tests and two identical builds pass; two complete asset-generation runs have identical Ogg hashes.
 - **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.
+
+## F-015 — 2026-11-04 — Boss API and final correctness findings
+
+- **Severity:** P1/P2/P3. **Source:** CodeRabbit full review on `1425baf84d8c1cb689c0845ec9a1996a92dd2482`.
+- **Findings:** nonexistent health `setCurrent`; duplicated rail kit; incorrect fixed co-op XP text; source/generated package tracking gap; standalone basis-total gap; ambiguous audit revision, duplicated title, and overbroad newer-version troubleshooting.
+- **Fix:** stable `setCurrentValue` and corrected mock, single rail delivery, computed XP placeholders, tracked source/generated parity enforcement, fixed 10,000 total, and factual documentation.
+- **Regression:** 134/134 tests, probability, two-build comparison, and packaging pass.
+- **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.
