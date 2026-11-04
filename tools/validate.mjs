@@ -19,6 +19,13 @@ if(bp.dependencies[0].uuid!==rp.header.uuid||rp.dependencies[0].uuid!==bp.header
 for(const [module,version] of [["@minecraft/server","2.8.0"],["@minecraft/server-ui","2.1.0"]])if(!bp.dependencies.some(d=>d.module_name===module&&d.version===version))errors.push(`Missing ${module} ${version}`);
 if(JSON.stringify(bp.header.min_engine_version)!=="[1,26,30]")errors.push("Wrong min_engine_version");
 pass("Manifest UUIDs, dependencies, stable API pins, and engine version");
+for(const tier of ["lucky","super","chaos"]){
+ const file=`packs/behavior_pack/blocks/${tier}.json`;
+ if(!fs.existsSync(file)){errors.push(`Missing required block definition ${file}`);continue;}
+ const data=JSON.parse(fs.readFileSync(file,"utf8")),block=data["minecraft:block"],c=block.components;
+ if(block.description?.identifier!==`luckychaos:${tier==="lucky"?"lucky":tier+"_lucky"}_block`)errors.push(`${file}: wrong required block identifier`);
+ if(c["minecraft:geometry"]!=="minecraft:geometry.full_block")errors.push(`${file}: missing full-block geometry`);
+}
 for(const file of walk("packs/behavior_pack/blocks").filter(f=>f.endsWith(".json"))){const data=JSON.parse(fs.readFileSync(file,"utf8")),c=data["minecraft:block"].components;if(c["minecraft:geometry"]!=="minecraft:geometry.full_block")errors.push(`${file}: missing full-block geometry`);}
 for(const file of walk("packs/behavior_pack/items").filter(f=>f.endsWith(".json"))){const data=JSON.parse(fs.readFileSync(file,"utf8")),name=data["minecraft:item"].components["minecraft:display_name"];if(typeof name?.value!=="string")errors.push(`${file}: invalid display_name object`);}
 if(!fs.existsSync("packs/resource_pack/texts/language_names.json"))errors.push("Missing custom language names");

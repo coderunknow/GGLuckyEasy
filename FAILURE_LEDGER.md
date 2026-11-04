@@ -129,3 +129,11 @@ Append-only. Resolved failures remain recorded.
 - **Fix:** exact/rechecked Operator permission, online delivery fallback, five-second due-only journal retry, per-location overlap prevention, nearby gift filtering, explicit merge exception, two-build hash test, Git tracked-file packaging, caught validation errors, and mandatory tier checks.
 - **Regression:** 132/132 tests and two identical builds pass. New overlap, due-time, and distant-gift cases are covered.
 - **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.
+
+## F-014 — 2026-11-04 — Terrain API, deadline, and deterministic asset findings
+
+- **Severity:** P1/P2. **Source:** CodeRabbit full review on `d2a642918bdb63bed256311b0097ed60ff0915b5`.
+- **Findings:** missing `restoreAt`; missing target dereference; nonexistent `Block.getPermutation()` hidden by mocks; nondeterministic Ogg serials; missing required-block checks; ambiguous release-stage wording.
+- **Fix:** persisted tick-matched deadlines, missing-target guards, stable `permutation` property and corrected mocks, output bitexact encoder flags with two-run hash comparison, required ID validation, and explicit pre/post-release gates.
+- **Regression:** 134/134 tests and two identical builds pass; two complete asset-generation runs have identical Ogg hashes.
+- **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.

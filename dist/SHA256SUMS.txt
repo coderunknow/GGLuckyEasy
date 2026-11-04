@@ -1,3 +1,3 @@
-a8a41bca33021f4999f66ef5e6be6f1a0fc92dee21713f8a6df3623041152c46  GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack
-036d3da33ac312a587c2d5df434e7246c8ef740794ab797230f7aaa6ab012161  GGLuckyEasy-Resources-v0.1.0-dev1.mcpack
-35799be5131dfacf24fc5d8fcbf80f9b968cede256482e4b515cbfee1c6a307b  GGLuckyEasy-v0.1.0-dev1.mcaddon
+92e0ef3cc0af5fccb9bad4d141b3264d0447b38fbcf12cb54952387329528d58  GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack
+e1da8dc1230e5712a8a0fbb8c509991a1dddcb10ce0dc31fa92b2efcc6285f52  GGLuckyEasy-Resources-v0.1.0-dev1.mcpack
+74ff4ea3a86df6e41b33d7b73518e4ba306f59f46a124c57c9bf84e64fc19de5  GGLuckyEasy-v0.1.0-dev1.mcaddon

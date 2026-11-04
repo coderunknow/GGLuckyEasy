@@ -21,7 +21,7 @@ function fixture(){
   heightRange:{min:-64,max:320},spawned,
   spawnEntity(id,location){const e=entity(id);e.typeId=id;e.location=location;spawned.push(e);return e;},
   spawnItem(){},spawnParticle(){},createExplosion(){actions.push("explosion");},getEntities(){return[{teleport(){actions.push("magnet");}}];},
-  getBlock(location){const b={location,typeId:"minecraft:air",isAir:true,isLiquid:false,isValid:true,setType(id){this.typeId=id;this.isAir=id==="minecraft:air";blocks.push(id);},getPermutation(){return{type:{id:this.typeId},getAllStates:()=>({})};},setPermutation(p){this.setType(p.type.id);},getComponent(id){return id==="minecraft:inventory"&&this.typeId==="minecraft:chest"?{container}:undefined;}};return b;}
+  getBlock(location){const b={location,typeId:"minecraft:air",isAir:true,isLiquid:false,isValid:true,setType(id){this.typeId=id;this.isAir=id==="minecraft:air";blocks.push(id);},get permutation(){return{type:{id:this.typeId},getAllStates:()=>({})};},setPermutation(p){this.setType(p.type.id);},getComponent(id){return id==="minecraft:inventory"&&this.typeId==="minecraft:chest"?{container}:undefined;}};return b;}
  };
  const player={id:"A",location:{x:0,y:64,z:0},dimension,getComponent(id){return id==="minecraft:inventory"?{container}:undefined;},addEffect(id){effects.push(id);},playSound(){actions.push("sound");},teleport(){actions.push("teleport");}};
  const other={...player,id:"B",addEffect(){},teleport(){}};

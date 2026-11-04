@@ -49,6 +49,6 @@ for tier,notes in {'lucky':[660,880], 'super':[660,880,1320], 'chaos':[440,740,3
    t=i/rate; env=(1-i/(rate*.12))**2; value=.22*env*(math.sin(2*math.pi*freq*t)+.3*math.sin(2*math.pi*freq*2*t)); samples.append(int(value*32767))
  wav=snd/f'{tier}.wav'
  with wave.open(str(wav),'wb') as w: w.setparams((1,2,rate,len(samples),'NONE','not compressed')); w.writeframes(struct.pack('<'+'h'*len(samples),*samples))
- subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-loglevel','error','-y','-i',str(wav),'-c:a','libvorbis','-q:a','4',str(snd/f'{tier}.ogg')],check=True)
+ subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-loglevel','error','-y','-i',str(wav),'-fflags','+bitexact','-flags:a','+bitexact','-serial_offset','0','-c:a','libvorbis','-q:a','4',str(snd/f'{tier}.ogg')],check=True)
  wav.unlink()
 print('Generated 3 blocks, 7 item icons, 2 pack icons, and 3 original sounds.')

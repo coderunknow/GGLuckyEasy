@@ -30,7 +30,7 @@ Custom creature/boss/vehicle geometry was evaluated but not added: vanilla model
 |---|---|---|---|
 | Static selected pack checks | Linux/Node | PASS | `evidence/static-validation.json` |
 | Stable API declaration typecheck | server 2.8.0/UI 2.1.0 | PASS | `evidence/final-local-audit.log` |
-| Automated suite | Node 22 | 132/132 PASS | `evidence/final-local-audit.log` |
+| Automated suite | Node 22 | 134/134 PASS | `evidence/final-local-audit.log` |
 | Event operation mocks | 90 outcomes | PASS; not device evidence | `evidence/event-results.json` |
 | Probability | 200,000 seeded draws/tier | PASS | `evidence/probability.json` and `.csv` |
 | Dependency audit | npm | 0 vulnerabilities | `evidence/npm-audit.json` |
@@ -48,11 +48,12 @@ Custom creature/boss/vehicle geometry was evaluated but not added: vanilla model
 - CodeRabbit baseline full review on `b30d57824255615f7aaae13e9f6466a38bff061c`: FINISHED; 15 findings addressed.
 - CodeRabbit remediation full review on `6ee57c96c3a4643bb67104de55a7730c9e13984a`: FINISHED; 11 findings addressed.
 - CodeRabbit final-candidate full review on `18d6e1a8506dca64fffcbb20ebc5e1c8a19a550e`: FINISHED; 9 findings addressed.
-- Final consolidated-head review: required after this push and recorded in `evidence/review-status.json`.
+- CodeRabbit consolidated review on `d2a642918bdb63bed256311b0097ed60ff0915b5`: FINISHED; 6 findings addressed.
+- Final release-head review: required after this push and recorded in `evidence/review-status.json`.
 - Kilo/Codex/Copilot: quota-limited; no completed findings claimed.
 
 Raw review data is preserved in `evidence/coderabbit-*.json`.
 
 ## Release rationale
 
-The owner’s prerelease exception permits inaccessible device/two-player coverage to remain explicitly UNVERIFIED/BLOCKED when all applicable automated and CI checks pass and no known P0/P1 defect remains. This exception does not hide the unavailable coverage or convert mocks into gameplay evidence. Merge/tag/publication additionally requires current-head review, final CI, post-merge CI, exact-commit rebuild, and published-hash verification.
+The owner’s prerelease exception permits inaccessible device/two-player coverage to remain explicitly UNVERIFIED/BLOCKED when all applicable automated and CI checks pass and no known P0/P1 defect remains. This exception does not hide the unavailable coverage or convert mocks into gameplay evidence. Current-head review and final PR CI are pre-merge gates. Post-merge CI and an exact-merged-commit rebuild are post-merge gates. Published-hash verification is a post-publication gate.

@@ -6,7 +6,7 @@ let scheduled;
 const source=fs.readFileSync("src/runtime/operations.js","utf8").replace('import { ItemStack, EnchantmentType, BlockPermutation, system } from "@minecraft/server";',`const ItemStack=class{};const EnchantmentType=class{};const BlockPermutation=class{static resolve(id){return{type:{id}};}};const system=globalThis.__safetySystem;`);
 globalThis.__safetySystem={runTimeout(callback){scheduled=callback;}};
 const {EventOperations,isProtectedType,canRestoreTerrain}=await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`);
-function block(typeId){return{location:{x:0,y:64,z:0},typeId,isAir:typeId==="minecraft:air",isValid:true,getComponent(){return typeId==="minecraft:chest"?{container:{}}:undefined;},getPermutation(){return{type:{id:this.typeId},getAllStates:()=>({})};},setType(id){this.typeId=id;this.isAir=id==="minecraft:air";},setPermutation(p){this.setType(p.type.id);}};}
+function block(typeId){return{location:{x:0,y:64,z:0},typeId,isAir:typeId==="minecraft:air",isValid:true,getComponent(){return typeId==="minecraft:chest"?{container:{}}:undefined;},get permutation(){return{type:{id:this.typeId},getAllStates:()=>({})};},setType(id){this.typeId=id;this.isAir=id==="minecraft:air";},setPermutation(p){this.setType(p.type.id);}};}
 function context(target){return{player:{},dimension:{id:"overworld",getBlock(){return target;}},location:{x:0,y:64,z:0},random:()=>.5};}
 
 test("temporary terrain does not overwrite a subsequent player edit",()=>{
@@ -46,4 +46,16 @@ test("due-only journal recovery does not restore future records",()=>{
  journal.add([{id:"future",dimension:"overworld",location:target.location,oldType:"minecraft:stone",oldStates:{},eventType:"minecraft:cobweb",restoreAt:Date.now()+60000}]);
  const op=new EventOperations({getDimension(){return {getBlock(){return target;}};}},{},{},journal);op.restoreJournaledTerrain(true);
  assert.equal(target.typeId,"minecraft:cobweb");assert.equal(journal.records.length,1);
+});
+test("temporary terrain records and honors a matching restore deadline",()=>{
+ const target=block("minecraft:stone"),journal=new TerrainJournal(()=>undefined,()=>{}),op=new EventOperations({getDimension(){return {getBlock(){return target;}};}}, {terrainDestruction:true},{},journal);
+ op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:20});
+ assert.ok(journal.records[0].restoreAt>=Date.now()+19000);target.isValid=false;scheduled();target.isValid=true;
+ op.restoreJournaledTerrain(true);assert.equal(target.typeId,"minecraft:cobweb");
+ journal.records[0].restoreAt=Date.now()-1;op.restoreJournaledTerrain(true);assert.equal(target.typeId,"minecraft:stone");
+});
+test("missing terrain targets are skipped without losing prior recovery records",()=>{
+ const target=block("minecraft:stone"),journal=new TerrainJournal(()=>undefined,()=>{}),ctx=context(target);let calls=0;
+ ctx.dimension.getBlock=()=>++calls===1?target:undefined;const op=new EventOperations({}, {terrainDestruction:true},{},journal);
+ op.terrainPatch(ctx,{block:"minecraft:cobweb",radius:1,height:0,seconds:1});assert.equal(journal.records.length,1);assert.equal(target.typeId,"minecraft:cobweb");
 });

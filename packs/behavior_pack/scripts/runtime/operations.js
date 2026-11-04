@@ -22,7 +22,7 @@ export class EventOperations {
     const records = changes.map(([block, permutation], index) => ({
       id: `${ctx.dimension.id}:${block.location.x},${block.location.y},${block.location.z}:${Date.now()}:${this.terrainSequence++}:${index}`,
       dimension: ctx.dimension.id, location: block.location, eventType,
-      oldType: permutation.type.id, oldStates: permutation.getAllStates()
+      oldType: permutation.type.id, oldStates: permutation.getAllStates(), restoreAt: Date.now() + ticks * 50
     }));
     if (this.terrainJournal && !this.terrainJournal.canFit(records.length)) throw new Error("Too many concurrent temporary terrain events");
     try { this.terrainJournal?.add(records); }
@@ -148,7 +148,7 @@ export class EventOperations {
       if (Math.abs(x) + Math.abs(z) < d.radius || Math.abs(x) + Math.abs(z) > d.radius + 1) continue;
       const loc = above(ctx.location, 0); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (target && !this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) && !protectedBlock(target) && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.getPermutation()]); target.setType(block); }
+      if (target && !this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) && !protectedBlock(target) && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.permutation]); target.setType(block); }
     }
     this.scheduleTerrainRestore(ctx, changes, block, 30 * 20);
   }
@@ -158,8 +158,8 @@ export class EventOperations {
     for (let x = -d.radius; x <= d.radius; x++) for (let z = -d.radius; z <= d.radius; z++) {
       const loc = above(ctx.location, d.height); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) || protectedBlock(target) || (!airLike(target) && !this.settings.terrainDestruction)) continue;
-      changes.push([target, target.getPermutation()]); target.setType(d.block);
+      if (!target || this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) || protectedBlock(target) || (!airLike(target) && !this.settings.terrainDestruction)) continue;
+      changes.push([target, target.permutation]); target.setType(d.block);
     }
     this.scheduleTerrainRestore(ctx, changes, d.block, d.seconds * 20);
   }
