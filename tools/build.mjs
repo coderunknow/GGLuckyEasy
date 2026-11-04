@@ -1,0 +1,10 @@
+import fs from "node:fs";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+const root = process.cwd();
+const destination = path.join(root, "packs/behavior_pack/scripts");
+fs.rmSync(destination, { recursive: true, force: true });
+fs.mkdirSync(destination, { recursive: true });
+fs.cpSync(path.join(root, "src"), destination, { recursive: true });
+const result = spawnSync("python3", ["tools/package.py"], { cwd: root, stdio: "inherit" });
+if (result.status !== 0) process.exit(result.status ?? 1);

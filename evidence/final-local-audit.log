@@ -1,0 +1,709 @@
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 audit
+> npm run validate && npm run typecheck && npm test && npm run test:probability && npm run build
+
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 validate
+> node tools/validate.mjs
+
+PASS 19 JSON files parsed
+PASS Manifest UUIDs, dependencies, stable API pins, and engine version
+PASS 90 registry IDs and 100% tier weight totals
+PASS English/Vietnamese event and block localization coverage
+PASS Texture atlases and original sound references resolve
+PASS Tier activation mapping and free-play policy scan
+PASS Relative module imports resolve
+PASSED: 51 files, 90 events
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 typecheck
+> tsc -p tsconfig.json
+
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: one coordinate cannot activate twice while in flight
+ok 1 - one coordinate cannot activate twice while in flight
+  ---
+  duration_ms: 0.889229
+  type: 'test'
+  ...
+# Subtest: a later block at the same coordinate activates after release
+ok 2 - a later block at the same coordinate activates after release
+  ---
+  duration_ms: 0.176396
+  type: 'test'
+  ...
+# Subtest: different dimensions and coordinates are independent
+ok 3 - different dimensions and coordinates are independent
+  ---
+  duration_ms: 0.126202
+  type: 'test'
+  ...
+# Subtest: PRNG is reproducible
+ok 4 - PRNG is reproducible
+  ---
+  duration_ms: 1.557785
+  type: 'test'
+  ...
+# Subtest: all tier probability tables are complete and total 100%
+ok 5 - all tier probability tables are complete and total 100%
+  ---
+  duration_ms: 0.490788
+  type: 'test'
+  ...
+# Subtest: selection is deterministic and can reach every eligible event
+ok 6 - selection is deterministic and can reach every eligible event
+  ---
+  duration_ms: 788.311334
+  type: 'test'
+  ...
+# Subtest: level curve grants points without grinding thousands of openings
+ok 7 - level curve grants points without grinding thousands of openings
+  ---
+  duration_ms: 0.41802
+  type: 'test'
+  ...
+# Subtest: discovery XP is awarded once while opening XP continues
+ok 8 - discovery XP is awarded once while opening XP continues
+  ---
+  duration_ms: 0.352595
+  type: 'test'
+  ...
+# Subtest: skill costs and caps are enforced
+ok 9 - skill costs and caps are enforced
+  ---
+  duration_ms: 0.512435
+  type: 'test'
+  ...
+# Subtest: migration preserves old XP and malformed data gets a safe fresh state
+ok 10 - migration preserves old XP and malformed data gets a safe fresh state
+  ---
+  duration_ms: 0.238869
+  type: 'test'
+  ...
+# Subtest: player state cloning prevents co-op/versus cross-attribution
+ok 11 - player state cloning prevents co-op/versus cross-attribution
+  ---
+  duration_ms: 0.171151
+  type: 'test'
+  ...
+# Subtest: exactly 90 non-placeholder unique event definitions
+ok 12 - exactly 90 non-placeholder unique event definitions
+  ---
+  duration_ms: 1.265265
+  type: 'test'
+  ...
+# Subtest: every event maps to an implemented operation and is eligible in a tier
+ok 13 - every event maps to an implemented operation and is eligible in a tier
+  ---
+  duration_ms: 1.328497
+  type: 'test'
+  ...
+# Subtest: all ten required categories and four classifications are represented
+ok 14 - all ten required categories and four classifications are represented
+  ---
+  duration_ms: 0.876627
+  type: 'test'
+  ...
+# Subtest: all structure templates stay within the 160-cell mobile budget
+ok 15 - all structure templates stay within the 160-cell mobile budget
+  ---
+  duration_ms: 0.661984
+  type: 'test'
+  ...
+# Subtest: both localization files include every event name and description
+ok 16 - both localization files include every event name and description
+  ---
+  duration_ms: 4.582665
+  type: 'test'
+  ...
+# Subtest: custom content never uses the vanilla namespace
+ok 17 - custom content never uses the vanilla namespace
+  ---
+  duration_ms: 0.170124
+  type: 'test'
+  ...
+# Subtest: progression and Unicode settings round-trip as primitive JSON strings
+ok 18 - progression and Unicode settings round-trip as primitive JSON strings
+  ---
+  duration_ms: 1.393405
+  type: 'test'
+  ...
+# Subtest: missing, malformed, or non-string dynamic properties use non-destructive fallback
+ok 19 - missing, malformed, or non-string dynamic properties use non-destructive fallback
+  ---
+  duration_ms: 0.264763
+  type: 'test'
+  ...
+# Subtest: complete discovery state remains below Bedrock's 32,767-character property limit
+ok 20 - complete discovery state remains below Bedrock's 32,767-character property limit
+  ---
+  duration_ms: 0.290234
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_emerald_cache
+ok 21 - operation smoke: loot_emerald_cache
+  ---
+  duration_ms: 2.130445
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_diamond_pouch
+ok 22 - operation smoke: loot_diamond_pouch
+  ---
+  duration_ms: 0.434693
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_netherite_scrap
+ok 23 - operation smoke: loot_netherite_scrap
+  ---
+  duration_ms: 0.257876
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_golden_feast
+ok 24 - operation smoke: loot_golden_feast
+  ---
+  duration_ms: 0.171342
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_enchanted_apple
+ok 25 - operation smoke: loot_enchanted_apple
+  ---
+  duration_ms: 0.111039
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_totem
+ok 26 - operation smoke: loot_totem
+  ---
+  duration_ms: 0.136059
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_elytra
+ok 27 - operation smoke: loot_elytra
+  ---
+  duration_ms: 0.104928
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_beacon
+ok 28 - operation smoke: loot_beacon
+  ---
+  duration_ms: 0.167207
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_books
+ok 29 - operation smoke: loot_books
+  ---
+  duration_ms: 0.351651
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_music
+ok 30 - operation smoke: loot_music
+  ---
+  duration_ms: 2.835682
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_ocean
+ok 31 - operation smoke: loot_ocean
+  ---
+  duration_ms: 0.600376
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_explorer
+ok 32 - operation smoke: loot_explorer
+  ---
+  duration_ms: 0.2402
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_guardian
+ok 33 - operation smoke: gear_guardian
+  ---
+  duration_ms: 0.58796
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_swift
+ok 34 - operation smoke: gear_swift
+  ---
+  duration_ms: 0.232256
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_aqua
+ok 35 - operation smoke: gear_aqua
+  ---
+  duration_ms: 0.104776
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_night
+ok 36 - operation smoke: gear_night
+  ---
+  duration_ms: 0.073116
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_fire
+ok 37 - operation smoke: gear_fire
+  ---
+  duration_ms: 0.054159
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_jump
+ok 38 - operation smoke: gear_jump
+  ---
+  duration_ms: 0.101148
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_utility
+ok 39 - operation smoke: gear_utility
+  ---
+  duration_ms: 0.128923
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_saturation
+ok 40 - operation smoke: gear_saturation
+  ---
+  duration_ms: 0.057118
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_allay
+ok 41 - operation smoke: mob_allay
+  ---
+  duration_ms: 0.291619
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_cat
+ok 42 - operation smoke: mob_cat
+  ---
+  duration_ms: 0.145414
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_wolf
+ok 43 - operation smoke: mob_wolf
+  ---
+  duration_ms: 0.070586
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_axolotl
+ok 44 - operation smoke: mob_axolotl
+  ---
+  duration_ms: 0.06263
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_sniffer
+ok 45 - operation smoke: mob_sniffer
+  ---
+  duration_ms: 0.058533
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_zombie_party
+ok 46 - operation smoke: mob_zombie_party
+  ---
+  duration_ms: 0.290594
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_skeleton_ring
+ok 47 - operation smoke: mob_skeleton_ring
+  ---
+  duration_ms: 0.175221
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_slime_stack
+ok 48 - operation smoke: mob_slime_stack
+  ---
+  duration_ms: 0.094229
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_phantom
+ok 49 - operation smoke: mob_phantom
+  ---
+  duration_ms: 0.127808
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_creeper_confetti
+ok 50 - operation smoke: mob_creeper_confetti
+  ---
+  duration_ms: 0.079505
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_bee_swarm
+ok 51 - operation smoke: mob_bee_swarm
+  ---
+  duration_ms: 0.078071
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_iron_golem
+ok 52 - operation smoke: mob_iron_golem
+  ---
+  duration_ms: 0.051427
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_anvil
+ok 53 - operation smoke: trap_anvil
+  ---
+  duration_ms: 0.266914
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_lava_ring
+ok 54 - operation smoke: trap_lava_ring
+  ---
+  duration_ms: 0.420381
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_tnt
+ok 55 - operation smoke: trap_tnt
+  ---
+  duration_ms: 0.29117
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_web
+ok 56 - operation smoke: trap_web
+  ---
+  duration_ms: 0.235561
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_ice
+ok 57 - operation smoke: trap_ice
+  ---
+  duration_ms: 0.130341
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_magma
+ok 58 - operation smoke: trap_magma
+  ---
+  duration_ms: 0.082665
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_pit
+ok 59 - operation smoke: trap_pit
+  ---
+  duration_ms: 0.350618
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_lightning
+ok 60 - operation smoke: trap_lightning
+  ---
+  duration_ms: 0.196837
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_poison
+ok 61 - operation smoke: trap_poison
+  ---
+  duration_ms: 0.087455
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_blind
+ok 62 - operation smoke: trap_blind
+  ---
+  duration_ms: 0.058853
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_void_fear
+ok 63 - operation smoke: trap_void_fear
+  ---
+  duration_ms: 0.07409
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_explosion
+ok 64 - operation smoke: trap_explosion
+  ---
+  duration_ms: 0.151581
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_tiny
+ok 65 - operation smoke: transform_tiny
+  ---
+  duration_ms: 0.102357
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_giant
+ok 66 - operation smoke: transform_giant
+  ---
+  duration_ms: 0.062738
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_bouncy
+ok 67 - operation smoke: transform_bouncy
+  ---
+  duration_ms: 0.062264
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_ghost
+ok 68 - operation smoke: transform_ghost
+  ---
+  duration_ms: 0.154478
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_fish
+ok 69 - operation smoke: transform_fish
+  ---
+  duration_ms: 0.059384
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_magnet
+ok 70 - operation smoke: transform_magnet
+  ---
+  duration_ms: 0.21966
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_zero_g
+ok 71 - operation smoke: transform_zero_g
+  ---
+  duration_ms: 0.066091
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_speed
+ok 72 - operation smoke: transform_speed
+  ---
+  duration_ms: 0.055306
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_swap
+ok 73 - operation smoke: prank_swap
+  ---
+  duration_ms: 0.161545
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_launch
+ok 74 - operation smoke: prank_launch
+  ---
+  duration_ms: 0.077058
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_fake_diamond
+ok 75 - operation smoke: prank_fake_diamond
+  ---
+  duration_ms: 0.05661
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_chicken_rain
+ok 76 - operation smoke: prank_chicken_rain
+  ---
+  duration_ms: 0.167226
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_sound
+ok 77 - operation smoke: prank_sound
+  ---
+  duration_ms: 0.132921
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_pumpkin
+ok 78 - operation smoke: prank_pumpkin
+  ---
+  duration_ms: 0.057008
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_teleport
+ok 79 - operation smoke: prank_teleport
+  ---
+  duration_ms: 0.294877
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_party
+ok 80 - operation smoke: prank_party
+  ---
+  duration_ms: 0.105261
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_partner_gift
+ok 81 - operation smoke: prank_partner_gift
+  ---
+  duration_ms: 0.1015
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_name
+ok 82 - operation smoke: prank_name
+  ---
+  duration_ms: 0.11749
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_slime
+ok 83 - operation smoke: boss_slime
+  ---
+  duration_ms: 0.197868
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_zombie
+ok 84 - operation smoke: boss_zombie
+  ---
+  duration_ms: 0.088525
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_skeleton
+ok 85 - operation smoke: boss_skeleton
+  ---
+  duration_ms: 0.063232
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_spider
+ok 86 - operation smoke: boss_spider
+  ---
+  duration_ms: 0.059874
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_witch
+ok 87 - operation smoke: boss_witch
+  ---
+  duration_ms: 0.066311
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_piglin
+ok 88 - operation smoke: boss_piglin
+  ---
+  duration_ms: 0.057885
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_evoker
+ok 89 - operation smoke: boss_evoker
+  ---
+  duration_ms: 0.060678
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_wither
+ok 90 - operation smoke: boss_wither
+  ---
+  duration_ms: 0.058698
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_hut
+ok 91 - operation smoke: structure_hut
+  ---
+  duration_ms: 0.606776
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_picnic
+ok 92 - operation smoke: structure_picnic
+  ---
+  duration_ms: 0.2557
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_treasure
+ok 93 - operation smoke: structure_treasure
+  ---
+  duration_ms: 1.1932
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_fountain
+ok 94 - operation smoke: structure_fountain
+  ---
+  duration_ms: 0.120855
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_obelisk
+ok 95 - operation smoke: structure_obelisk
+  ---
+  duration_ms: 0.093706
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_garden
+ok 96 - operation smoke: structure_garden
+  ---
+  duration_ms: 0.082458
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_watchtower
+ok 97 - operation smoke: structure_watchtower
+  ---
+  duration_ms: 0.072525
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_cage
+ok 98 - operation smoke: structure_cage
+  ---
+  duration_ms: 0.074935
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_horse
+ok 99 - operation smoke: ride_horse
+  ---
+  duration_ms: 0.121585
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_camel
+ok 100 - operation smoke: ride_camel
+  ---
+  duration_ms: 0.056404
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_pig
+ok 101 - operation smoke: ride_pig
+  ---
+  duration_ms: 0.053054
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_boat
+ok 102 - operation smoke: ride_boat
+  ---
+  duration_ms: 0.048449
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_minecart
+ok 103 - operation smoke: ride_minecart
+  ---
+  duration_ms: 0.081976
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_strider
+ok 104 - operation smoke: ride_strider
+  ---
+  duration_ms: 0.051246
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_chaos_shard
+ok 105 - operation smoke: collect_chaos_shard
+  ---
+  duration_ms: 0.058933
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_lucky_coin
+ok 106 - operation smoke: collect_lucky_coin
+  ---
+  duration_ms: 0.048571
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_meme_token
+ok 107 - operation smoke: collect_meme_token
+  ---
+  duration_ms: 0.056982
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_star_fragment
+ok 108 - operation smoke: collect_star_fragment
+  ---
+  duration_ms: 0.048995
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_prank_badge
+ok 109 - operation smoke: collect_prank_badge
+  ---
+  duration_ms: 0.045607
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_crown
+ok 110 - operation smoke: collect_crown
+  ---
+  duration_ms: 0.044373
+  type: 'test'
+  ...
+1..110
+# tests 110
+# suites 0
+# pass 110
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1178.51621
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test:probability
+> node tools/probability-test.mjs 200000
+
+lucky: 200000 draws, 83 eligible, max |z|=2.492, chi2=62.91 (PASSED)
+super: 200000 draws, 89 eligible, max |z|=2.813, chi2=92.98 (PASSED)
+chaos: 200000 draws, 90 eligible, max |z|=2.237, chi2=76.18 (PASSED)
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 build
+> node tools/build.mjs
+
+BUILD dist/Lucky-Chaos-Behavior-v0.1.0-dev1.mcpack 25432 bytes sha256=3ae3d8d92209619a0b32e73fff95a0c108314bd4b61d34074b40f70ef3466983
+BUILD dist/Lucky-Chaos-Resources-v0.1.0-dev1.mcpack 29821 bytes sha256=dcbae1026e7b6ee01d85ec1c9a905e42f90dc6c69eb683606513981a53c4e516
+BUILD dist/Lucky-Chaos-v0.1.0-dev1.mcaddon 56521 bytes sha256=cff4e65dde7c22f0a1d76f943d8e77b8c8fc77b25eab27012a04f8ce4dc0374d
+PASS mcaddon inspected: 43 entries, CRC valid

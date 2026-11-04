@@ -1,0 +1,23 @@
+{
+  "version": "v0.1.0-dev1",
+  "archives": [
+    {
+      "file": "Lucky-Chaos-Behavior-v0.1.0-dev1.mcpack",
+      "bytes": 25432,
+      "sha256": "3ae3d8d92209619a0b32e73fff95a0c108314bd4b61d34074b40f70ef3466983"
+    },
+    {
+      "file": "Lucky-Chaos-Resources-v0.1.0-dev1.mcpack",
+      "bytes": 29821,
+      "sha256": "dcbae1026e7b6ee01d85ec1c9a905e42f90dc6c69eb683606513981a53c4e516"
+    },
+    {
+      "file": "Lucky-Chaos-v0.1.0-dev1.mcaddon",
+      "bytes": 56521,
+      "sha256": "cff4e65dde7c22f0a1d76f943d8e77b8c8fc77b25eab27012a04f8ce4dc0374d"
+    }
+  ],
+  "mcaddon_entries": 43,
+  "required_entries_present": true,
+  "crc_check": "PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Lucky Chaos Resources v0.1.0-dev1",
+    "description": "Original colorful pixel art, sounds, and localization",
+    "uuid": "3e48e156-e274-5724-9d24-70580556dec4",
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      30
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "f5e564fa-125a-5503-90f8-3089f90cf829",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a82bb565-5d87-5fba-ba0c-6452a04918e9",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "GGLuckyEasy"
+    ],
+    "license": "MIT"
+  }
+}

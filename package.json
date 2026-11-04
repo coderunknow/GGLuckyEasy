@@ -1,0 +1,20 @@
+{
+  "name": "ggluckyeasy-lucky-chaos",
+  "version": "0.1.0-dev1",
+  "private": true,
+  "type": "module",
+  "description": "Lucky Chaos Minecraft Bedrock 26.3 add-on",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node tools/validate.mjs",
+    "test:probability": "node tools/probability-test.mjs 200000",
+    "audit": "npm run validate && npm run typecheck && npm test && npm run test:probability && npm run build",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@minecraft/server": "2.8.0",
+    "@minecraft/server-ui": "2.1.0",
+    "typescript": "^5.9.3"
+  }
+}
