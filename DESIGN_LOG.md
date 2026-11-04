@@ -49,3 +49,11 @@ Linux/Node validation and mocks cannot prove Bedrock import, real-device renderi
 ## 2026-11-04 — 012: Primitive JSON persistence
 
 Declaration-level type checking found that dynamic properties cannot store arbitrary objects. Settings and progression now use UTF-8 JSON strings through a safe codec. **Impact:** persistence conforms to the stable 2.8.0 contract, malformed/missing values fall back without destructive migration, and Unicode/state-size behavior has regression tests.
+
+## 2026-11-04 — 013: Comprehensive release remediation
+
+A second full audit and baseline CodeRabbit review identified durability, world-safety, pack-schema, archive, evidence, and branding defects. Boss ownership/offline rewards and temporary terrain now have bounded versioned journals; restoration preserves later edits. Arena creation validates before writing. Product branding is now GGLuckyEasy without changing internal identifiers. **Impact:** resolves known progression/world-edit loss mechanisms and produces semantically inspected nested-pack artifacts.
+
+## 2026-11-04 — 014: Prerelease verification exception
+
+The owner authorized prerelease publication with genuinely inaccessible real-client/multiplayer coverage explicitly UNVERIFIED or BLOCKED, provided all applicable automated/CI checks pass and no known P0/P1 defect remains. **Impact:** device evidence is not fabricated or relabeled; release decisions distinguish automated correctness from unavailable retail coverage.

@@ -1,9 +1,10 @@
 {
-  "timestamp": "2026-11-04T05:00:24.900Z",
+  "timestamp": "2026-11-04T08:48:49.221Z",
   "status": "PASSED",
   "checks": [
-    "19 JSON files parsed",
+    "20 JSON files parsed",
     "Manifest UUIDs, dependencies, stable API pins, and engine version",
+    "Block geometry, item display names, and custom language registration",
     "90 registry IDs and 100% tier weight totals",
     "English/Vietnamese event and block localization coverage",
     "Texture atlases and original sound references resolve",
@@ -11,6 +12,6 @@
     "Relative module imports resolve"
   ],
   "errors": [],
-  "filesScanned": 51,
+  "filesScanned": 57,
   "eventCount": 90
 }

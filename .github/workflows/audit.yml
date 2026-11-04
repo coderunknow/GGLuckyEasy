@@ -1,4 +1,4 @@
-name: Lucky Chaos audit
+name: GGLuckyEasy audit
 on:
   pull_request:
   push:
@@ -19,7 +19,7 @@ jobs:
       - run: npm run audit
       - uses: actions/upload-artifact@v4
         with:
-          name: lucky-chaos-dev1-artifacts
+          name: ggluckyeasy-dev1-artifacts
           path: |
             dist/
             evidence/

@@ -1,3 +1,3 @@
-3ae3d8d92209619a0b32e73fff95a0c108314bd4b61d34074b40f70ef3466983  Lucky-Chaos-Behavior-v0.1.0-dev1.mcpack
-dcbae1026e7b6ee01d85ec1c9a905e42f90dc6c69eb683606513981a53c4e516  Lucky-Chaos-Resources-v0.1.0-dev1.mcpack
-cff4e65dde7c22f0a1d76f943d8e77b8c8fc77b25eab27012a04f8ce4dc0374d  Lucky-Chaos-v0.1.0-dev1.mcaddon
+2abd3f27c957297ce13bf625311638d9d5c4efecc8164635e6eae3940e197ce4  GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack
+a874d62637e781665de80e59bd13e77cfa46bed1094b560bda2f5cf7be321524  GGLuckyEasy-Resources-v0.1.0-dev1.mcpack
+3a6212cc113c89d35b4397b33cb02d49ca6b2d0068468289f3b48e560006c957  GGLuckyEasy-v0.1.0-dev1.mcaddon

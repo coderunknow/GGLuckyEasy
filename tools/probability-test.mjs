@@ -17,3 +17,4 @@ for(const [tierIndex,[tier,weights]] of Object.entries(table.tiers).entries()){
  console.log(`${tier}: ${samples} draws, ${eligible} eligible, max |z|=${maxAbsZ.toFixed(3)}, chi2=${chiSquare.toFixed(2)} (${report.tiers[tier].status})`);
 }
 fs.mkdirSync("evidence",{recursive:true});fs.writeFileSync("evidence/probability.json",JSON.stringify(report,null,2)+"\n");fs.writeFileSync("evidence/probability.csv",csv.join("\n")+"\n");
+if(Object.values(report.tiers).some(tier=>tier.status!=="PASSED"))process.exitCode=1;

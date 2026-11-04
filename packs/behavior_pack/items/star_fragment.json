@@ -9,7 +9,9 @@
     },
     "components": {
       "minecraft:icon": "luckychaos_star_fragment",
-      "minecraft:display_name": "item.luckychaos:star_fragment.name",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:star_fragment.name"
+      },
       "minecraft:max_stack_size": 16,
       "minecraft:hand_equipped": false
     }

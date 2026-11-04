@@ -9,7 +9,9 @@
     },
     "components": {
       "minecraft:icon": "luckychaos_prank_badge",
-      "minecraft:display_name": "item.luckychaos:prank_badge.name",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:prank_badge.name"
+      },
       "minecraft:max_stack_size": 16,
       "minecraft:hand_equipped": false
     }

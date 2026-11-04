@@ -9,7 +9,9 @@
     },
     "components": {
       "minecraft:icon": "luckychaos_lucky_coin",
-      "minecraft:display_name": "item.luckychaos:lucky_coin.name",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:lucky_coin.name"
+      },
       "minecraft:max_stack_size": 16,
       "minecraft:hand_equipped": false
     }

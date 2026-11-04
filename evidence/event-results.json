@@ -1,0 +1,275 @@
+{
+  "sourceHash": "5c5f2b95524d8061be28171308a8f87f39b2bbffdfe2c965ce75a4e98b03fe7a",
+  "results": {
+    "loot_emerald_cache": {
+      "status": "PASS"
+    },
+    "loot_diamond_pouch": {
+      "status": "PASS"
+    },
+    "loot_netherite_scrap": {
+      "status": "PASS"
+    },
+    "loot_golden_feast": {
+      "status": "PASS"
+    },
+    "loot_enchanted_apple": {
+      "status": "PASS"
+    },
+    "loot_totem": {
+      "status": "PASS"
+    },
+    "loot_elytra": {
+      "status": "PASS"
+    },
+    "loot_beacon": {
+      "status": "PASS"
+    },
+    "loot_books": {
+      "status": "PASS"
+    },
+    "loot_music": {
+      "status": "PASS"
+    },
+    "loot_ocean": {
+      "status": "PASS"
+    },
+    "loot_explorer": {
+      "status": "PASS"
+    },
+    "gear_guardian": {
+      "status": "PASS"
+    },
+    "gear_swift": {
+      "status": "PASS"
+    },
+    "gear_aqua": {
+      "status": "PASS"
+    },
+    "gear_night": {
+      "status": "PASS"
+    },
+    "gear_fire": {
+      "status": "PASS"
+    },
+    "gear_jump": {
+      "status": "PASS"
+    },
+    "gear_utility": {
+      "status": "PASS"
+    },
+    "gear_saturation": {
+      "status": "PASS"
+    },
+    "mob_allay": {
+      "status": "PASS"
+    },
+    "mob_cat": {
+      "status": "PASS"
+    },
+    "mob_wolf": {
+      "status": "PASS"
+    },
+    "mob_axolotl": {
+      "status": "PASS"
+    },
+    "mob_sniffer": {
+      "status": "PASS"
+    },
+    "mob_zombie_party": {
+      "status": "PASS"
+    },
+    "mob_skeleton_ring": {
+      "status": "PASS"
+    },
+    "mob_slime_stack": {
+      "status": "PASS"
+    },
+    "mob_phantom": {
+      "status": "PASS"
+    },
+    "mob_creeper_confetti": {
+      "status": "PASS"
+    },
+    "mob_bee_swarm": {
+      "status": "PASS"
+    },
+    "mob_iron_golem": {
+      "status": "PASS"
+    },
+    "trap_anvil": {
+      "status": "PASS"
+    },
+    "trap_lava_ring": {
+      "status": "PASS"
+    },
+    "trap_tnt": {
+      "status": "PASS"
+    },
+    "trap_web": {
+      "status": "PASS"
+    },
+    "trap_ice": {
+      "status": "PASS"
+    },
+    "trap_magma": {
+      "status": "PASS"
+    },
+    "trap_pit": {
+      "status": "PASS"
+    },
+    "trap_lightning": {
+      "status": "PASS"
+    },
+    "trap_poison": {
+      "status": "PASS"
+    },
+    "trap_blind": {
+      "status": "PASS"
+    },
+    "trap_void_fear": {
+      "status": "PASS"
+    },
+    "trap_explosion": {
+      "status": "PASS"
+    },
+    "transform_tiny": {
+      "status": "PASS"
+    },
+    "transform_giant": {
+      "status": "PASS"
+    },
+    "transform_bouncy": {
+      "status": "PASS"
+    },
+    "transform_ghost": {
+      "status": "PASS"
+    },
+    "transform_fish": {
+      "status": "PASS"
+    },
+    "transform_magnet": {
+      "status": "PASS"
+    },
+    "transform_zero_g": {
+      "status": "PASS"
+    },
+    "transform_speed": {
+      "status": "PASS"
+    },
+    "prank_swap": {
+      "status": "PASS"
+    },
+    "prank_launch": {
+      "status": "PASS"
+    },
+    "prank_fake_diamond": {
+      "status": "PASS"
+    },
+    "prank_chicken_rain": {
+      "status": "PASS"
+    },
+    "prank_sound": {
+      "status": "PASS"
+    },
+    "prank_pumpkin": {
+      "status": "PASS"
+    },
+    "prank_teleport": {
+      "status": "PASS"
+    },
+    "prank_party": {
+      "status": "PASS"
+    },
+    "prank_partner_gift": {
+      "status": "PASS"
+    },
+    "prank_name": {
+      "status": "PASS"
+    },
+    "boss_slime": {
+      "status": "PASS"
+    },
+    "boss_zombie": {
+      "status": "PASS"
+    },
+    "boss_skeleton": {
+      "status": "PASS"
+    },
+    "boss_spider": {
+      "status": "PASS"
+    },
+    "boss_witch": {
+      "status": "PASS"
+    },
+    "boss_piglin": {
+      "status": "PASS"
+    },
+    "boss_evoker": {
+      "status": "PASS"
+    },
+    "boss_wither": {
+      "status": "PASS"
+    },
+    "structure_hut": {
+      "status": "PASS"
+    },
+    "structure_picnic": {
+      "status": "PASS"
+    },
+    "structure_treasure": {
+      "status": "PASS"
+    },
+    "structure_fountain": {
+      "status": "PASS"
+    },
+    "structure_obelisk": {
+      "status": "PASS"
+    },
+    "structure_garden": {
+      "status": "PASS"
+    },
+    "structure_watchtower": {
+      "status": "PASS"
+    },
+    "structure_cage": {
+      "status": "PASS"
+    },
+    "ride_horse": {
+      "status": "PASS"
+    },
+    "ride_camel": {
+      "status": "PASS"
+    },
+    "ride_pig": {
+      "status": "PASS"
+    },
+    "ride_boat": {
+      "status": "PASS"
+    },
+    "ride_minecart": {
+      "status": "PASS"
+    },
+    "ride_strider": {
+      "status": "PASS"
+    },
+    "collect_chaos_shard": {
+      "status": "PASS"
+    },
+    "collect_lucky_coin": {
+      "status": "PASS"
+    },
+    "collect_meme_token": {
+      "status": "PASS"
+    },
+    "collect_star_fragment": {
+      "status": "PASS"
+    },
+    "collect_prank_badge": {
+      "status": "PASS"
+    },
+    "collect_crown": {
+      "status": "PASS"
+    }
+  }
+}

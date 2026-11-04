@@ -1,0 +1,11 @@
+import fs from "node:fs";
+import {performance} from "node:perf_hooks";
+import {EVENTS} from "../src/events/registry.js";
+import {createRandom,selectEvent} from "../src/core/random.js";
+import table from "../src/config/probabilities.json" with { type:"json" };
+const random=createRandom(26032026),start=performance.now(),before=process.memoryUsage().heapUsed;
+let last;
+for(let i=0;i<600000;i++)last=selectEvent(EVENTS,table.tiers.chaos,random);
+const elapsed=performance.now()-start,after=process.memoryUsage().heapUsed;
+const report={environment:`Node ${process.version} on Linux (not mobile/Bedrock)`,draws:600000,elapsedMs:elapsed,drawsPerSecond:600000/(elapsed/1000),heapDeltaBytes:after-before,lastEvent:last.id,limits:{structureCells:160,temporaryTerrainRecords:64,activeBossRecords:64,pendingRewardsPerPlayer:32,magnetItems:32,chickenRain:6}};
+fs.writeFileSync("evidence/performance.json",JSON.stringify(report,null,2)+"\n");console.log(JSON.stringify(report,null,2));

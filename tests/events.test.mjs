@@ -6,7 +6,7 @@ import table from "../src/config/probabilities.json" with { type: "json" };
 // Bedrock's type-definition package has no Node runtime. Load the operation
 // class with its game-only imports stubbed; structure generation itself is pure.
 const operationSource = fs.readFileSync("src/runtime/operations.js", "utf8")
-  .replace('import { ItemStack, EnchantmentType, system } from "@minecraft/server";', 'const ItemStack = class {}; const EnchantmentType = class {}; const system = { runTimeout() {} };');
+  .replace('import { ItemStack, EnchantmentType, BlockPermutation, system } from "@minecraft/server";', 'const ItemStack = class {}; const EnchantmentType = class {}; const BlockPermutation = class { static resolve(id){return {type:{id}};} }; const system = { runTimeout() {} };');
 const { EventOperations } = await import(`data:text/javascript;base64,${Buffer.from(operationSource).toString("base64")}`);
 
 const ids = EVENTS.map(e => e.id);
@@ -40,6 +40,10 @@ test("both localization files include every event name and description", () => {
     const text = fs.readFileSync(`packs/resource_pack/texts/${lang}.lang`, "utf8");
     for (const id of ids) { assert.match(text, new RegExp(`^${id}\\.name=`, "m")); assert.match(text, new RegExp(`^${id}\\.description=`, "m")); }
   }
+});
+test("Vietnamese strings do not contain historical mixed-case diacritic typos",()=>{
+ for(const event of EVENTS)assert.doesNotMatch(event.name.vi_VN+event.description.vi_VN,/TrờI|ngườI|thờI|ThờI|CườI|NgườI/);
+ const text=fs.readFileSync("packs/resource_pack/texts/vi_VN.lang","utf8");assert.doesNotMatch(text,/TrờI|ngườI|thờI|ThờI|CườI|NgườI/);
 });
 test("custom content never uses the vanilla namespace", () => {
   for (const event of EVENTS) assert.ok(!event.id.startsWith("minecraft:"));

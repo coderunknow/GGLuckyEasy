@@ -9,7 +9,9 @@
     },
     "components": {
       "minecraft:icon": "luckychaos_meme_token",
-      "minecraft:display_name": "item.luckychaos:meme_token.name",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:meme_token.name"
+      },
       "minecraft:max_stack_size": 16,
       "minecraft:hand_equipped": false
     }

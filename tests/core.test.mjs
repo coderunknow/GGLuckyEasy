@@ -38,6 +38,11 @@ test("migration preserves old XP and malformed data gets a safe fresh state", ()
   assert.equal(migrateProgression({xp: 12}).xp, 12);
   assert.equal(migrateProgression(null).level, 1);
 });
+test("malformed v1 state is sanitized and discoveries are deduplicated", () => {
+  const valid = new Set([EVENTS[0].id]);
+  const p = migrateProgression({version:1,xp:-50,level:"bad",skillPoints:1e20,opened:-2,skills:{fortune:99,vitality:-2,insight:"2"},discoveries:[EVENTS[0].id,EVENTS[0].id,"unknown",42]},valid);
+  assert.equal(p.xp,0);assert.equal(p.level,1);assert.equal(p.skillPoints,10000);assert.deepEqual(p.skills,{fortune:3,vitality:0,insight:2});assert.deepEqual(p.discoveries,[EVENTS[0].id]);
+});
 test("player state cloning prevents co-op/versus cross-attribution", () => {
   const a = freshProgression(), b = freshProgression();
   const next = discover(a, EVENTS[0], 10).state;

@@ -43,7 +43,7 @@ Statuses: **VERIFIED**, **PARTIALLY VERIFIED**, **UNVERIFIED**, **FAILED**, **NO
 
 1. Entity and boss visuals use vanilla models with names, effects, compositions, particles, and sounds. Custom creature/boss/vehicle geometry and bespoke entity textures are **not implemented**; visual quality in-game is UNVERIFIED.
 2. “Tiny” and “giant” transformations are effect-based fantasy presentations, not persistent player mesh scaling. This avoids unsupported player overrides.
-3. Boss bonus-reward tracking is in memory. A boss spawned before a complete world reload may not receive its tracked reward afterward. Normal player XP/settings persistence is separately versioned and saved.
+3. Boss ownership and offline rewards use versioned durable storage. Player XP/settings and temporary terrain cleanup are separately versioned and saved. Retail reload behavior remains UNVERIFIED.
 4. Dynamic properties assume stable Bedrock player IDs within the same world. Real leave/rejoin persistence must be verified on retail clients.
 5. Structure placement never overwrites occupied construction; in crowded spaces the event safely fizzles and reports a generic safe-failure message.
 6. Terrain destruction defaults to enabled. Its consequences on real mobile performance and world safety are UNVERIFIED; backups are required advice.

@@ -9,7 +9,9 @@
     },
     "components": {
       "minecraft:icon": "luckychaos_chaos_shard",
-      "minecraft:display_name": "item.luckychaos:chaos_shard.name",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:chaos_shard.name"
+      },
       "minecraft:max_stack_size": 16,
       "minecraft:hand_equipped": false
     }

@@ -2,7 +2,7 @@
 
 ## Objective and version
 
-Maintain **GGLuckyEasy / Lucky Chaos**, a free-play Minecraft Bedrock **1.26.30** add-on for Android/iOS and two players. This source revision is `v0.1.0-dev1`; manifest numeric versions remain `[0,1,0]`. Do not silently increment versions or publish stable releases.
+Maintain **GGLuckyEasy**, a free-play Minecraft Bedrock **1.26.30** add-on for Android/iOS and two players. This source revision is `v0.1.0-dev1`; manifest numeric versions remain `[0,1,0]`. Do not silently increment versions or publish stable releases.
 
 ## Layout
 
@@ -54,4 +54,4 @@ A missing runtime/device test is **not** a pass. Node mocks are not Bedrock runt
 
 ## Release permission
 
-The user authorizes branch commits, push, PR, CI/review, merge, exact `v0.1.0-dev1` tag, and prerelease **only when every mandatory gate passes**. If a gate is blocked, do not merge, tag, or publish. Never publish to Marketplace or a third party. Release assets must be the exact files whose SHA-256 hashes were verified.
+The user authorizes branch commits, push, PR, CI/review, merge, exact `v0.1.0-dev1` tag, and prerelease **only when every mandatory gate passes**. If a known P0/P1 defect or applicable automated/CI gate fails, do not merge, tag, or publish. Under the updated prerelease policy, genuinely inaccessible real-device/multiplayer coverage may remain UNVERIFIED/BLOCKED with explicit disclosure when every applicable available check passes. Never publish to Marketplace or a third party. Release assets must be the exact files whose SHA-256 hashes were verified.

@@ -1,10 +1,10 @@
-# GGLuckyEasy — Lucky Chaos
+# GGLuckyEasy — GGLuckyEasy
 
 **Version:** `v0.1.0-dev1` · **Minecraft Bedrock:** retail 1.26.30 (“26.3”) · **Android/iOS, two-player friendly**
 
 A colorful, chaotic Lucky Block add-on for ordinary Survival worlds and optional free-play arenas. Place a block, break it, and discover one of **90 registered outcomes**. There are no rounds, countdowns, scores, leaderboards, forced endings, or automatic resets.
 
-![Original Lucky Chaos block and item art](assets/art-overview.png)
+![Original GGLuckyEasy block and item art](assets/art-overview.png)
 
 > **Development preview:** packages and automated checks are provided, but real Bedrock import, two-player, Android/iOS, and BlueStacks behavior remains unverified in the build environment. Back up important worlds. Terrain destruction is enabled by default and can be disabled.
 
@@ -12,12 +12,12 @@ A colorful, chaotic Lucky Block add-on for ordinary Survival worlds and optional
 
 ### Combined package (recommended)
 
-1. Download `Lucky-Chaos-v0.1.0-dev1.mcaddon` from `dist/` or the prerelease if one is published.
+1. Download `GGLuckyEasy-v0.1.0-dev1.mcaddon` from `dist/` or the prerelease if one is published.
 2. Open it with Minecraft Bedrock. Wait for both import messages.
-3. Edit or create a world → **Behavior Packs** → activate **Lucky Chaos Behavior**. Activate **Lucky Chaos Resources** under Resource Packs. Mutual pack dependencies normally select both.
+3. Edit or create a world → **Behavior Packs** → activate **GGLuckyEasy Behavior**. Activate **GGLuckyEasy Resources** under Resource Packs. Mutual pack dependencies normally select both.
 4. No experiment toggles are required. Enter the world and use the **Chaos Compass** for the quick guide.
 
-Separate `Lucky-Chaos-Behavior-v0.1.0-dev1.mcpack` and `Lucky-Chaos-Resources-v0.1.0-dev1.mcpack` files are installation fallbacks. Import both.
+Separate `GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack` and `GGLuckyEasy-Resources-v0.1.0-dev1.mcpack` files are installation fallbacks. Import both.
 
 ### Android
 
@@ -57,7 +57,7 @@ Exact individual probabilities and bilingual descriptions: [EVENT_CATALOG.md](EV
 Use a **Chaos Compass** → **World settings** (world operators only):
 
 - **Survival Free:** ordinary Minecraft remains unchanged; open blocks whenever and wherever you choose.
-- **Minigame Free Arena:** the same unrestricted play, with an optional one-time operator-built 25×25 platform at the operator’s position. Building is confirmed in settings and is irreversible; there is no automatic arena reset.
+- **Minigame Free Arena:** the same unrestricted play, with an optional one-time operator-built 25×25 platform at the operator’s position. The complete volume is validated first: occupied or protected areas are rejected, and there is no automatic arena reset.
 - **Co-op:** a nearby second player receives a small, separately saved assist-XP/discovery reward when the opener succeeds.
 - **Versus:** no assist XP; each player keeps independent XP, skills, discoveries, and inventory. Rivalry is player-driven, with no competition system.
 
@@ -78,7 +78,7 @@ Upgrade costs begin at 2 points and increase by one per owned rank. Open the Com
 - **Allow terrain destruction:** enabled by default for the requested chaos. Disabling it substitutes non-destructive effects and prevents pit/TNT/explosion block damage.
 - **Allow player-targeted pranks:** controls swaps and random teleports.
 - Structures validate their full volume and never overwrite player construction, regardless of the destruction setting.
-- Event block operations and spawns are bounded; temporary patches restore themselves. Boss reward tracking is in memory, so a boss already spawned before a full world reload may lose its bonus reward.
+- Event block operations and spawns are bounded. Temporary patches use a reload-safe journal and preserve later player edits. Boss ownership and offline rewards use durable storage.
 - Back up important worlds before playing. Powerful Chaos events can include TNT, lightning, explosions, and a Wither.
 
 ## Two-player multiplayer
@@ -92,10 +92,10 @@ Actual two-client synchronization remains **UNVERIFIED** until the procedure in 
 
 ## Troubleshooting
 
-- **Pack will not activate:** confirm Minecraft is 1.26.30 or newer and both packs imported. Remove older duplicate Lucky Chaos packs before reimporting.
+- **Pack will not activate:** confirm Minecraft is 1.26.30 or newer and both packs imported. Remove older duplicate GGLuckyEasy packs before reimporting.
 - **Compass/menu does not work:** verify the Behavior Pack is active and scripts were not blocked by the world/host settings. No Beta APIs toggle is needed.
 - **Block does nothing:** report the tier, coordinates, outcome attempt, and content-log error. A failed event is isolated and should not disable later blocks.
-- **Vietnamese text looks wrong:** select `vi_VN` in Minecraft language settings; English is the fallback. The source language files are UTF-8.
+- **Vietnamese text looks wrong:** select `vi_VN` (Tiếng Việt) in Minecraft language settings; the pack registers this custom language name and English is the fallback. The source language files are UTF-8.
 - **Too much destruction:** disable terrain destruction in Compass settings and restore a backup if needed.
 - **Import fallback:** import the separate Behavior and Resource `.mcpack` files.
 

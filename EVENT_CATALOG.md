@@ -1,6 +1,6 @@
-# Lucky Chaos Event Catalog
+# GGLuckyEasy Event Catalog
 
-Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.json`; 10,000 = 100%. A dash means ineligible. **Automated status means registry + mock operation smoke testing, not a Bedrock device test.**
+Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.json`; 10,000 = 100%. A dash means ineligible. **Automated status is read from hash-matched test evidence, never assumed. Mock tests are not Bedrock device tests.**
 
 | ID | English / Tiếng Việt | Category | Class | Lucky | Super | Chaos | Handler | Automated evidence | Real-device status |
 |---|---|---|---|---:|---:|---:|---|---|---|
@@ -10,9 +10,9 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 | `loot_golden_feast` | Golden Feast<br>Yến Tiệc Vàng | loot | positive | 2.250% | 1.730% | 1.120% | `lootMulti` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_enchanted_apple` | Mythic Apple<br>Táo Thần Thoại | loot | positive | — | 1.730% | 1.120% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_totem` | Second Chance<br>Cơ Hội Thứ Hai | loot | positive | — | 1.730% | 1.110% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `loot_elytra` | Sky Gift<br>Món Quà Bầu TrờI | loot | positive | — | 1.730% | 1.110% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `loot_elytra` | Sky Gift<br>Món Quà Bầu Trời | loot | positive | — | 1.730% | 1.110% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_beacon` | Beacon in a Box<br>Hải Đăng Trong Hộp | loot | positive | — | 1.730% | 1.110% | `lootMulti` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `loot_books` | Enchanter's Parcel<br>Bưu Kiện Phù Phép | loot | positive | 2.250% | 1.730% | 1.110% | `lootMulti` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `loot_books` | Enchanter's Parcel<br>Bưu Kiện Phù Phép | loot | positive | 2.250% | 1.730% | 1.110% | `enchantedBooks` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_music` | Prize Playlist<br>Danh Sách Nhạc Thưởng | loot | positive | 2.250% | 1.730% | 1.110% | `lootRandom` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_ocean` | Ocean Treasure<br>Kho Báu Đại Dương | loot | positive | 2.250% | 1.730% | 1.110% | `lootMulti` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `loot_explorer` | Explorer Kit<br>Bộ Thám Hiểm | loot | positive | 2.250% | 1.730% | 1.110% | `lootMulti` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
@@ -34,7 +34,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 | `mob_slime_stack` | Slime Stack<br>Tháp Slime | creatures | negative | 0.810% | 1.040% | 1.680% | `spawn` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `mob_phantom` | Sudden Squadron<br>Phi Đội Bất Ngờ | creatures | negative | 0.810% | 1.040% | 1.680% | `spawnOffset` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `mob_creeper_confetti` | Confetti Creepers<br>Creeper Pháo Hoa | creatures | negative | 0.810% | 1.040% | 1.680% | `spawnRing` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `mob_bee_swarm` | Bee-lieve It<br>Ong À Ong Ấy | creatures | negative | 0.810% | 1.040% | 1.680% | `spawn` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `mob_bee_swarm` | Bee-lieve It<br>Ong À Ong Ấy | creatures | neutral | 0.810% | 1.040% | 1.680% | `spawn` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `mob_iron_golem` | Pocket Guardian<br>Vệ Sĩ Bỏ Túi | creatures | positive | 1.870% | 1.440% | 0.930% | `spawn` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `trap_anvil` | Anvil Alert<br>Cảnh Báo Đe | traps | negative | 0.810% | 1.040% | 1.680% | `fallingBlock` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `trap_lava_ring` | Hot Circle<br>Vòng Lửa Nóng | traps | negative | 0.810% | 1.040% | 1.680% | `terrainRing` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
@@ -50,8 +50,8 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 | `trap_explosion` | Controlled Kaboom<br>Nổ Có Kiểm Soát | traps | negative | 0.810% | 1.040% | 1.680% | `explosion` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `transform_tiny` | Tiny Troubles<br>Rắc Rối Tí Hon | transformations | neutral | 1.130% | 1.040% | 1.200% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `transform_giant` | Giant Moment<br>Khoảnh Khắc Khổng Lồ | transformations | positive | 1.690% | 1.300% | 0.840% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `transform_bouncy` | Rubber Player<br>NgườI Cao Su | transformations | positive | 1.690% | 1.300% | 0.840% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `transform_ghost` | Ghostly Giggle<br>Ma CườI Khúc Khích | transformations | neutral | 1.130% | 1.040% | 1.200% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `transform_bouncy` | Rubber Player<br>Người Cao Su | transformations | positive | 1.690% | 1.300% | 0.840% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `transform_ghost` | Ghostly Giggle<br>Ma Cười Khúc Khích | transformations | neutral | 1.130% | 1.040% | 1.200% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `transform_fish` | Inner Fish<br>Con Cá Bên Trong | transformations | neutral | 1.130% | 1.040% | 1.200% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `transform_magnet` | Item Magnet<br>Nam Châm Vật Phẩm | transformations | positive | 1.690% | 1.300% | 0.840% | `magnet` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `transform_zero_g` | Moon Gravity<br>Trọng Lực Mặt Trăng | transformations | neutral | 1.130% | 1.040% | 1.200% | `effects` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
@@ -61,7 +61,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 | `prank_fake_diamond` | Diamond? Nope<br>Kim Cương? Không | pranks | neutral | 1.380% | 1.270% | 1.470% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `prank_chicken_rain` | Chicken Forecast<br>Dự Báo Gà Rơi | pranks | neutral | 1.380% | 1.270% | 1.470% | `chickenRain` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `prank_sound` | Invisible Applause<br>Tiếng Vỗ Tay Vô Hình | pranks | neutral | 1.380% | 1.270% | 1.470% | `soundShow` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
-| `prank_pumpkin` | Fashion Emergency<br>Thảm Họa ThờI Trang | pranks | neutral | 1.380% | 1.270% | 1.470% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
+| `prank_pumpkin` | Fashion Emergency<br>Thảm Họa Thời Trang | pranks | neutral | 1.380% | 1.270% | 1.470% | `loot` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `prank_teleport` | Wrong Door<br>Nhầm Cửa | pranks | neutral | 1.380% | 1.270% | 1.470% | `randomTeleport` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `prank_party` | Unexpected Party<br>Tiệc Bất Ngờ | pranks | positive | 2.060% | 1.590% | 1.020% | `party` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
 | `prank_partner_gift` | Pass the Potato<br>Chuyền Khoai Tây | pranks | neutral | 1.380% | 1.270% | 1.470% | `partnerGift` | PASS: `tests/runtime-events.test.mjs` | UNVERIFIED |
@@ -139,7 +139,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:loot_totem; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
-### `loot_elytra` — Sky Gift / Món Quà Bầu TrờI
+### `loot_elytra` — Sky Gift / Món Quà Bầu Trời
 
 - **EN:** An elytra for flight.
 - **VI:** Một cánh cứng để bay.
@@ -282,7 +282,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `mob_skeleton_ring` — Skeleton Ring / Vòng Vây Bộ Xương
 
 - **EN:** Skeletons surround the opener.
-- **VI:** Bộ xương bao vây ngườI mở.
+- **VI:** Bộ xương bao vây người mở.
 - **Entities:** minecraft:skeleton; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:mob_skeleton_ring; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -309,15 +309,15 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 
 ### `mob_bee_swarm` — Bee-lieve It / Ong À Ong Ấy
 
-- **EN:** A swarm of angry bees.
-- **VI:** Một đàn ong tức giận.
+- **EN:** A swarm of busy bees.
+- **VI:** Một đàn ong vo ve.
 - **Entities:** minecraft:bee; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:mob_bee_swarm; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
 ### `mob_iron_golem` — Pocket Guardian / Vệ Sĩ Bỏ Túi
 
 - **EN:** A named iron golem guards the area.
-- **VI:** Một ngườI sắt bảo vệ khu vực.
+- **VI:** Một người sắt bảo vệ khu vực.
 - **Entities:** minecraft:iron_golem; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:mob_iron_golem; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -345,7 +345,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `trap_web` — Spider Souvenir / Quà Lưu Niệm Nhện
 
 - **EN:** A temporary web patch around the opener.
-- **VI:** Một mảng tơ nhện quanh ngườI mở.
+- **VI:** Một mảng tơ nhện quanh người mở.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:trap_web; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -359,7 +359,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `trap_magma` — Hot Floor / Sàn Nóng
 
 - **EN:** A temporary magma floor.
-- **VI:** Một sàn magma tạm thờI.
+- **VI:** Một sàn magma tạm thời.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:trap_magma; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -387,7 +387,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `trap_blind` — Lights Out / Tắt Đèn
 
 - **EN:** Brief blindness and darkness particles.
-- **VI:** Mù tạm thờI kèm hạt tối.
+- **VI:** Mù tạm thời kèm hạt tối.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:trap_blind; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -419,14 +419,14 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:transform_giant; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
-### `transform_bouncy` — Rubber Player / NgườI Cao Su
+### `transform_bouncy` — Rubber Player / Người Cao Su
 
 - **EN:** High jumps with safe landing.
 - **VI:** Nhảy cao và tiếp đất an toàn.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:transform_bouncy; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
-### `transform_ghost` — Ghostly Giggle / Ma CườI Khúc Khích
+### `transform_ghost` — Ghostly Giggle / Ma Cười Khúc Khích
 
 - **EN:** Invisibility with night vision.
 - **VI:** Tàng hình kèm nhìn đêm.
@@ -457,21 +457,21 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `transform_speed` — Zoomies / Cơn Cuồng Tốc Độ
 
 - **EN:** Extreme temporary speed.
-- **VI:** Tốc độ cực cao tạm thờI.
+- **VI:** Tốc độ cực cao tạm thời.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:transform_speed; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
 ### `prank_swap` — Friendship Swap / Hoán Đổi Tình Bạn
 
 - **EN:** Two nearby players safely swap positions.
-- **VI:** Hai ngườI chơi gần nhau đổi vị trí an toàn.
+- **VI:** Hai người chơi gần nhau đổi vị trí an toàn.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:prank_swap; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
 ### `prank_launch` — Surprise Airlines / Hãng Bay Bất Ngờ
 
 - **EN:** The opener rises and lands safely.
-- **VI:** NgườI mở bay lên và hạ cánh an toàn.
+- **VI:** Người mở bay lên và hạ cánh an toàn.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:prank_launch; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
@@ -496,7 +496,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:prank_sound; manual: open eligible tier and follow EVENT_CATALOG.md`.
 
-### `prank_pumpkin` — Fashion Emergency / Thảm Họa ThờI Trang
+### `prank_pumpkin` — Fashion Emergency / Thảm Họa Thời Trang
 
 - **EN:** A carved pumpkin appears as a gift.
 - **VI:** Một quả bí ngô khắc xuất hiện làm quà.
@@ -520,7 +520,7 @@ Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.jso
 ### `prank_partner_gift` — Pass the Potato / Chuyền Khoai Tây
 
 - **EN:** The other nearby player receives a potato.
-- **VI:** NgườI chơi gần đó nhận một củ khoai tây.
+- **VI:** Người chơi gần đó nhận một củ khoai tây.
 - **Entities:** none; **structures:** none; **assets:** vanilla rendering + pack feedback
 - **Cleanup:** none; **expected cost:** low; **validation:** `tests/events.test.mjs:prank_partner_gift; manual: open eligible tier and follow EVENT_CATALOG.md`.
 

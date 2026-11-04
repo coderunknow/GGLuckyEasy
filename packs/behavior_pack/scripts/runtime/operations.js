@@ -1,19 +1,69 @@
-import { ItemStack, EnchantmentType, system } from "@minecraft/server";
+import { ItemStack, EnchantmentType, BlockPermutation, system } from "@minecraft/server";
 
 const airLike = block => !block || block.isAir || ["minecraft:short_grass", "minecraft:tall_grass", "minecraft:fern", "minecraft:dandelion", "minecraft:poppy"].includes(block.typeId);
 const above = (p, y = 1) => ({ x: Math.floor(p.x), y: Math.floor(p.y) + y, z: Math.floor(p.z) });
 const nearby = (p, radius, y = 2) => ({ x: p.x + radius, y: p.y + y, z: p.z + radius });
+const PROTECTED_TYPES = new Set(["minecraft:bedrock", "minecraft:chest", "minecraft:trapped_chest", "minecraft:barrel", "minecraft:ender_chest", "minecraft:spawner", "minecraft:trial_spawner", "minecraft:vault", "minecraft:end_portal", "minecraft:end_portal_frame", "minecraft:command_block", "minecraft:chain_command_block", "minecraft:repeating_command_block", "minecraft:structure_block", "minecraft:jigsaw"]);
+export const isProtectedType = typeId => PROTECTED_TYPES.has(typeId) || typeId.includes("shulker_box");
+export const canRestoreTerrain = (currentType, eventType) => currentType === eventType;
+const protectedBlock = block => !block || isProtectedType(block.typeId) || Boolean(block.getComponent("minecraft:inventory"));
+const restore = (block, permutation) => { if (block.setPermutation) block.setPermutation(permutation); else block.setType(permutation.type.id); };
 
 export class EventOperations {
-  constructor(world, settings, bosses) {
+  constructor(world, settings, bossTracker, terrainJournal) {
     this.world = world;
     this.settings = settings;
-    this.bosses = bosses;
+    this.bossTracker = bossTracker;
+    this.terrainJournal = terrainJournal;
+  }
+
+  scheduleTerrainRestore(ctx, changes, eventType, ticks) {
+    const records = changes.map(([block, permutation], index) => ({
+      id: `${ctx.dimension.id}:${block.location.x},${block.location.y},${block.location.z}:${Date.now()}:${index}`,
+      dimension: ctx.dimension.id, location: block.location, eventType,
+      oldType: permutation.type.id, oldStates: permutation.getAllStates()
+    }));
+    if (this.terrainJournal && !this.terrainJournal.canFit(records.length)) throw new Error("Too many concurrent temporary terrain events");
+    this.terrainJournal?.add(records);
+    const restoreAll = () => {
+      const completed = [];
+      for (let i = 0; i < changes.length; i++) {
+        const [block, old] = changes[i];
+        if (block.isValid && canRestoreTerrain(block.typeId, eventType)) restore(block, old);
+        completed.push(records[i].id);
+      }
+      this.terrainJournal?.remove(completed);
+    };
+    system.runTimeout(restoreAll, ticks);
+  }
+
+  restoreJournaledTerrain() {
+    if (!this.terrainJournal) return;
+    const completed = [];
+    for (const record of this.terrainJournal.records) {
+      try {
+        const dimension = this.world.getDimension(record.dimension), block = dimension.getBlock(record.location);
+        if (!block) continue;
+        if (canRestoreTerrain(block.typeId, record.eventType)) block.setPermutation(BlockPermutation.resolve(record.oldType, record.oldStates));
+        completed.push(record.id);
+      } catch { /* Unloaded chunks retain their journal until a later load. */ }
+    }
+    this.terrainJournal.remove(completed);
   }
 
   loot(ctx, d) { this.give(ctx.player, d.item, d.count); }
   lootMulti(ctx, d) { for (const [item, count] of d.items) this.give(ctx.player, item, count); }
   lootRandom(ctx, d) { this.give(ctx.player, d.items[Math.floor(ctx.random() * d.items.length)], 1); }
+  enchantedBooks(ctx, d) {
+    const inventory = ctx.player.getComponent("minecraft:inventory")?.container;
+    if (!inventory) throw new Error("Player inventory unavailable");
+    for (const enchantment of d.enchantments) {
+      const book = new ItemStack("minecraft:enchanted_book", 1);
+      book.getComponent("minecraft:enchantable").addEnchantment({ type: new EnchantmentType(enchantment), level: 1 });
+      const remainder = inventory.addItem(book); if (remainder) ctx.player.dimension.spawnItem(remainder, ctx.player.location);
+    }
+    this.give(ctx.player, "minecraft:lapis_lazuli", d.lapis);
+  }
   collectible(ctx, d) { this.give(ctx.player, d.item, 1); }
   give(player, id, count = 1) {
     const stack = new ItemStack(id, count);
@@ -44,7 +94,7 @@ export class EventOperations {
       const entity = ctx.dimension.spawnEntity(d.entity, nearby(ctx.location, (i % 3) - 1, 1));
       entity.nameTag = d.name;
       if (d.effect) entity.addEffect(d.effect, 120 * 20, { amplifier: 1 });
-      if (d.angry) entity.triggerEvent("minecraft:bee_aggressive");
+      if (d.entity === "minecraft:slime" && d.size >= 3) entity.triggerEvent("spawn_large");
     }
   }
   spawnRing(ctx, d) {
@@ -74,39 +124,50 @@ export class EventOperations {
     ctx.dimension.getBlock(loc)?.setType(d.block);
   }
   terrainRing(ctx, d) {
+    if (this.terrainJournal && !this.terrainJournal.canFit((d.radius * 2 + 1) ** 2)) throw new Error("Too many concurrent temporary terrain events");
     const block = this.settings.terrainDestruction ? d.block : d.fallback;
     const changes = [];
     for (let x = -d.radius; x <= d.radius; x++) for (let z = -d.radius; z <= d.radius; z++) {
       if (Math.abs(x) + Math.abs(z) < d.radius || Math.abs(x) + Math.abs(z) > d.radius + 1) continue;
       const loc = above(ctx.location, 0); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (target && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.typeId]); target.setType(block); }
+      if (target && !protectedBlock(target) && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.getPermutation()]); target.setType(block); }
     }
-    system.runTimeout(() => { for (const [target, old] of changes) if (target.isValid) target.setType(old); }, 30 * 20);
+    this.scheduleTerrainRestore(ctx, changes, block, 30 * 20);
   }
   terrainPatch(ctx, d) {
+    if (this.terrainJournal && !this.terrainJournal.canFit((d.radius * 2 + 1) ** 2)) throw new Error("Too many concurrent temporary terrain events");
     const changes = [];
     for (let x = -d.radius; x <= d.radius; x++) for (let z = -d.radius; z <= d.radius; z++) {
       const loc = above(ctx.location, d.height); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (!target || (!airLike(target) && !this.settings.terrainDestruction)) continue;
-      changes.push([target, target.typeId]); target.setType(d.block);
+      if (protectedBlock(target) || (!airLike(target) && !this.settings.terrainDestruction)) continue;
+      changes.push([target, target.getPermutation()]); target.setType(d.block);
     }
-    system.runTimeout(() => { for (const [target, old] of changes) if (target.isValid) target.setType(old); }, d.seconds * 20);
+    this.scheduleTerrainRestore(ctx, changes, d.block, d.seconds * 20);
   }
   pit(ctx, d) {
     if (!this.settings.terrainDestruction) { this.effects(ctx, { effects: [["slowness", 8, 1]] }); return; }
     for (let x = -d.radius; x <= d.radius; x++) for (let z = -d.radius; z <= d.radius; z++) for (let y = 0; y < d.depth; y++) {
       const block = ctx.dimension.getBlock({ x: Math.floor(ctx.location.x) + x, y: Math.floor(ctx.location.y) - y, z: Math.floor(ctx.location.z) + z });
-      if (block && !["minecraft:bedrock", "minecraft:end_portal", "minecraft:end_portal_frame"].includes(block.typeId)) block.setType("minecraft:air");
+      if (block && !protectedBlock(block)) block.setType("minecraft:air");
     }
   }
+  hasProtectedNearby(ctx, radius = 4) {
+    for (let x = -radius; x <= radius; x++) for (let y = -2; y <= 2; y++) for (let z = -radius; z <= radius; z++) {
+      if (protectedBlock(ctx.dimension.getBlock({ x: Math.floor(ctx.location.x) + x, y: Math.floor(ctx.location.y) + y, z: Math.floor(ctx.location.z) + z }))) return true;
+    }
+    return false;
+  }
   primedTnt(ctx) {
-    if (!this.settings.terrainDestruction) { this.soundShow(ctx); return; }
+    if (!this.settings.terrainDestruction || this.hasProtectedNearby(ctx)) { this.soundShow(ctx); return; }
     ctx.dimension.spawnEntity("minecraft:tnt", above(ctx.location, 1));
   }
   lightning(ctx) { ctx.dimension.spawnEntity("minecraft:lightning_bolt", nearby(ctx.location, ctx.radius ?? 4, 0)); }
-  explosion(ctx, d) { ctx.dimension.createExplosion(above(ctx.location, 1), d.radius, { breaksBlocks: this.settings.terrainDestruction, causesFire: false, source: ctx.player }); }
+  explosion(ctx, d) {
+    if (this.hasProtectedNearby(ctx, Math.ceil(d.radius) + 2)) { this.soundShow(ctx); return; }
+    ctx.dimension.createExplosion(above(ctx.location, 1), d.radius, { breaksBlocks: this.settings.terrainDestruction, causesFire: false, source: ctx.player });
+  }
 
   magnet(ctx, d) {
     const items = ctx.dimension.getEntities({ type: "minecraft:item", location: ctx.location, maxDistance: d.radius });
@@ -152,10 +213,16 @@ export class EventOperations {
     if (d.dangerous && !this.settings.terrainDestruction) { this.spawn(ctx, { entity: "minecraft:iron_golem", name: "Safety Golem", count: 1 }); return; }
     const entity = ctx.dimension.spawnEntity(d.entity, above(ctx.location, 2));
     entity.nameTag = `☠ ${d.name} ☠`;
+    if (d.entity === "minecraft:slime" && d.size >= 3) entity.triggerEvent("spawn_large");
     const health = entity.getComponent("minecraft:health");
-    if (health) { health.resetToMaxValue(); health.setCurrent(Math.min(d.health, health.effectiveMax)); }
+    if (health) {
+      const extra = Math.max(0, d.health - health.effectiveMax);
+      if (extra > 0) entity.addEffect("health_boost", 999999, { amplifier: Math.min(49, Math.ceil(extra / 4) - 1), showParticles: false });
+      health.resetToMaxValue(); health.setCurrent(Math.min(d.health, health.effectiveMax));
+    }
+    entity.addEffect("resistance", 999999, { amplifier: 1, showParticles: false });
     if (d.effect) entity.addEffect(d.effect, 999999, { amplifier: 1 });
-    this.bosses.set(entity.id, { reward: d.reward, count: d.rewardCount ?? d.count ?? 1, opener: ctx.player.id });
+    this.bossTracker.track(entity.id, { reward: d.reward, count: d.rewardCount ?? d.count ?? 1, opener: ctx.player.id });
     if (d.reinforcement && d.reinforcement.startsWith("minecraft:")) this.spawn(ctx, { entity: d.reinforcement, name: `${d.name}'s Minion`, count: Math.min(3, d.count) });
   }
 
@@ -167,7 +234,7 @@ export class EventOperations {
     // destruction is enabled. Replaceable vegetation is the only exception.
     for (const cell of cells) {
       const existing = ctx.dimension.getBlock(cell);
-      if (!existing || existing.typeId === "minecraft:bedrock" || existing.typeId === "minecraft:chest") throw new Error("Protected structure block");
+      if (protectedBlock(existing)) throw new Error("Protected structure block");
       if (!airLike(existing)) throw new Error("Structure volume occupied");
     }
     for (const cell of cells) { const block = ctx.dimension.getBlock(cell); if (block) block.setType(cell.block); }

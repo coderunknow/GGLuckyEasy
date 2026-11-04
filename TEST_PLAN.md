@@ -17,7 +17,7 @@ Command: `npm run audit` (and targeted reruns). Logs: `evidence/audit.log`, `evi
 | Deterministic PRNG and all eligible IDs reachable | PASSED | core tests |
 | Progression, discovery, skills, migration, player isolation | PASSED | core tests |
 | In-flight duplicate guard and later same-coordinate activation | PASSED | activation tests |
-| Total tests | **110 passed, 0 failed** after fixes | unit-tests.log |
+| Total tests | **124 passed, 0 failed** after fixes | unit-tests.log |
 | Probability, 200,000 seeded draws per tier | PASSED; details below | probability files |
 | Reproducible build and ZIP CRC/required entries | PASSED | build.json/audit.log |
 
@@ -85,7 +85,7 @@ Test Android physical/emulated client, iOS client, and Android client in BlueSta
 
 Measure baseline and during 1/5/10 simultaneous Chaos openings: frame time/FPS, memory, tick/content-log warnings, entity count, particle load, structure latency, cleanup, and reconnect. Include low-end Android and iOS if available. Stress temporary patches, Wither, chicken rain, and simultaneous arena events.
 
-Static budgets implemented: no perpetual tick loop, no ticking areas, 160-cell structure cap, six-chicken cap, small spawn counts, one-shot 32-item magnet, 32×32/16×16 textures, three short compressed sounds. These design limits are **not measured mobile performance evidence**.
+Host benchmark: `evidence/performance.json` measured 600,000 selections in Node with elapsed time and heap delta; this is not mobile evidence. Static budgets implemented: no perpetual tick loop, no ticking areas, 160-cell structure cap, six-chicken cap, small spawn counts, one-shot 32-item magnet, 32×32/16×16 textures, three short compressed sounds. These design limits are **not measured mobile performance evidence**.
 
 ## CI and final regression
 
@@ -93,4 +93,4 @@ GitHub Actions runs `npm ci --ignore-scripts` and `npm run audit` on the exact P
 
 ## Hosted CI and review result
 
-PR #1: GitHub Actions `audit` run `41776709937` completed **SUCCESS** on head `3241e9ea4f3831a1432ed10916fe613f4d02c3e7`. A final run is required after this documentation update. External review did not complete: CodeRabbit SKIPPED (repository auto-review policy), Kilo/Codex RATE-LIMITED (credits), and Copilot RATE-LIMITED (quota). These are not completed reviews and supplied no code findings.
+PR #1: GitHub Actions `audit` run `41776709937` completed **SUCCESS** on head `3241e9ea4f3831a1432ed10916fe613f4d02c3e7`. A final run is required after this documentation update. A subsequent documented manual `@coderabbitai full review` trigger on baseline head `b30d57824255615f7aaae13e9f6466a38bff061c` completed with 15 findings. The trigger acknowledgment and inline findings are preserved in `evidence/coderabbit-initial-trigger.json`, `evidence/coderabbit-inline-baseline.json`, and `evidence/review-status.json`. Kilo/Codex/Copilot remained quota-limited. A fresh full review is required on the remediation head.

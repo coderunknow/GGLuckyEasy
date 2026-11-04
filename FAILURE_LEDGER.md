@@ -84,3 +84,32 @@ Append-only. Resolved failures remain recorded.
 - **Fix:** added `encodeState`/`decodeState` JSON-string codec for settings and progression, plus safe fallback.
 - **Regression:** Unicode round-trip, malformed data, and full-state size tests; typecheck passes.
 - **Status:** RESOLVED in source; actual world save/reopen remains UNVERIFIED.
+
+## F-008 — 2026-11-04 — Boss reward and temporary-terrain durability
+
+- **Severity:** P1. **Reproduction:** reload after spawning a boss or temporary patch; disconnect the opener before boss death.
+- **Expected:** ownership, one reward, and temporary cleanup survive lifecycle transitions.
+- **Actual:** in-memory boss map lost rewards; scheduled terrain restoration was lost on reload.
+- **Fix:** versioned `BossTracker` outbox and `TerrainJournal`, plus reload restoration and regression tests.
+- **Status:** RESOLVED in source/simulation; retail lifecycle UNVERIFIED.
+
+## F-009 — 2026-11-04 — Terrain/container and arena overwrite risks
+
+- **Severity:** P1. **Reproduction:** place containers/construction in patch, pit, explosion, or arena volume; edit a temporary patch before cleanup.
+- **Expected:** no uncontrolled data loss or cleanup overwriting newer edits.
+- **Actual:** several paths replaced containers/arena contents and cleanup restored unconditionally.
+- **Fix:** protected-type/container checks, conditional permutation restoration, explosion/TNT proximity fallback, and full arena prevalidation.
+- **Status:** RESOLVED in source with world-safety tests.
+
+## F-010 — 2026-11-04 — Pack and archive schema findings
+
+- **Severity:** P1/P2. **Source:** independent self-audit and CodeRabbit baseline full review.
+- **Actual:** missing block geometry, item display-name shape, root-level sound definitions, invalid bee event, blank enchanted books, and flat `.mcaddon` layout risked broken presentation/import.
+- **Fix:** corrected pack JSON, moved sounds, verified vanilla slime/bee events, enchanted books, and nested `.mcpack` archives with semantic validation.
+- **Status:** RESOLVED statically; actual import UNVERIFIED.
+
+## F-011 — 2026-11-04 — Evidence tooling could report false success
+
+- **Severity:** P1 process integrity. **Actual:** catalog generation hard-coded PASS and probability REVIEW exited zero.
+- **Fix:** catalog requires hash-matched event results and preserves separate device evidence; probability REVIEW now exits nonzero.
+- **Status:** RESOLVED.
