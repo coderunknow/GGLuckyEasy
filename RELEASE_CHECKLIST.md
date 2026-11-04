@@ -6,7 +6,7 @@ Statuses preserve the difference between automated evidence and unavailable reta
 |---|---|---|---|
 | 1 | Complete source and consistent GGLuckyEasy branding | PASS | Source/pack/docs/artifact branding; internal identifiers preserved |
 | 2 | Mandatory documentation current | PASS | Required root documents and hash-matched event catalog |
-| 3 | Both packs validate | PASS | JSON, schemas checked, geometry, display names, sounds, assets, localization |
+| 3 | Both packs receive documented static validation | PASS (selected static checks) / UNVERIFIED (complete Bedrock schema) | JSON parse, required fields, geometry, display names, sounds, assets, localization; no claim of exhaustive schema validation |
 | 4 | Combined `.mcaddon` built and semantically inspected | PASS | Two nested `.mcpack` files, manifests/dependencies/assets/CRC in `evidence/build.json` |
 | 5 | Three tier implementations audited | PASS (source) / UNVERIFIED (retail) | Registration, activation, probabilities, and handlers checked; no client available |
 | 6 | 90 meaningful events implemented and audited | PASS (source/mock) / UNVERIFIED (retail) | 90/90 hash-matched mock consequences plus event audit |

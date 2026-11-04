@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 import { EVENTS } from "../src/events/registry.js";
 import table from "../src/config/probabilities.json" with { type: "json" };
 const pct=n=>`${(n/100).toFixed(3)}%`;
-const sourceHash=crypto.createHash("sha256").update(fs.readFileSync("src/events/registry.js")).update(fs.readFileSync("src/runtime/operations.js")).digest("hex");
+const sourceHash=crypto.createHash("sha256").update(fs.readFileSync("src/events/registry.js")).update(fs.readFileSync("src/runtime/operations.js")).update(fs.readFileSync("tests/runtime-events.test.mjs")).digest("hex");
 let results={};try{const evidence=JSON.parse(fs.readFileSync("evidence/event-results.json","utf8"));if(evidence.sourceHash===sourceHash)results=evidence.results;}catch{}
 let devices={};try{devices=JSON.parse(fs.readFileSync("evidence/device-event-status.json","utf8"));}catch{}
 const lines=["# GGLuckyEasy Event Catalog", "", "Version `v0.1.0-dev1`. Weights are basis points in `src/config/probabilities.json`; 10,000 = 100%. A dash means ineligible. **Automated status is read from hash-matched test evidence, never assumed. Mock tests are not Bedrock device tests.**", "", "| ID | English / Tiếng Việt | Category | Class | Lucky | Super | Chaos | Handler | Automated evidence | Real-device status |", "|---|---|---|---|---:|---:|---:|---|---|---|"];

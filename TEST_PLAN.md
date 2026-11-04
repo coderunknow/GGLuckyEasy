@@ -17,7 +17,7 @@ Command: `npm run audit` (and targeted reruns). Logs: `evidence/audit.log`, `evi
 | Deterministic PRNG and all eligible IDs reachable | PASSED | core tests |
 | Progression, discovery, skills, migration, player isolation | PASSED | core tests |
 | In-flight duplicate guard and later same-coordinate activation | PASSED | activation tests |
-| Total tests | **126 passed, 0 failed** after fixes | unit-tests.log |
+| Total tests | **129 passed, 0 failed** after fixes | final-local-audit.log |
 | Probability, 200,000 seeded draws per tier | PASSED; details below | probability files |
 | Reproducible build and ZIP CRC/required entries | PASSED | build.json/audit.log |
 

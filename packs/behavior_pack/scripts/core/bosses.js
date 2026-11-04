@@ -1,5 +1,7 @@
 import { encodeState, decodeState } from "./persistence.js";
 
+export const undeliveredRewards = (rewards, deliveredCount) => rewards.slice(Math.max(0, deliveredCount));
+
 const cleanReward = value => value && typeof value.reward === "string" && typeof value.opener === "string"
   ? { reward: value.reward, count: Math.max(1, Math.min(64, Math.floor(Number(value.count) || 1))), opener: value.opener }
   : undefined;

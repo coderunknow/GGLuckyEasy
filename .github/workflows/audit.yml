@@ -16,7 +16,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npm run audit
+      - run: set -o pipefail; npm run audit 2>&1 | tee evidence/ci-audit.log
       - uses: actions/upload-artifact@v4
         with:
           name: ggluckyeasy-dev1-artifacts

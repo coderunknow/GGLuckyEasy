@@ -31,7 +31,7 @@ function fixture(){
 
 const results={};
 after(()=>{
- const sourceHash=crypto.createHash("sha256").update(fs.readFileSync("src/events/registry.js")).update(fs.readFileSync("src/runtime/operations.js")).digest("hex");
+ const sourceHash=crypto.createHash("sha256").update(fs.readFileSync("src/events/registry.js")).update(fs.readFileSync("src/runtime/operations.js")).update(fs.readFileSync("tests/runtime-events.test.mjs")).digest("hex");
  fs.mkdirSync("evidence",{recursive:true});fs.writeFileSync("evidence/event-results.json",JSON.stringify({sourceHash,results},null,2)+"\n");
 });
 for(const event of EVENTS){
@@ -45,3 +45,10 @@ for(const event of EVENTS){
  }catch(error){results[event.id]={status:"FAIL",error:String(error)};throw error;}
  });
 }
+
+test("Friendship Swap never targets a distant player",()=>{
+ const f=fixture(),distant={...f.player,id:"C",location:{x:1000,y:64,z:0},teleport(){throw new Error("distant teleport");}};
+ f.world.getAllPlayers=()=>[f.player,distant];const op=new EventOperations(f.world,{pranks:true},{track(){}});
+ op.swap({player:f.player,dimension:f.dimension,location:f.player.location},{radius:12});
+ assert.equal(f.given.length,1);assert.equal(f.given[0].typeId,"minecraft:potato");
+});

@@ -113,3 +113,11 @@ Append-only. Resolved failures remain recorded.
 - **Severity:** P1 process integrity. **Actual:** catalog generation hard-coded PASS and probability REVIEW exited zero.
 - **Fix:** catalog requires hash-matched event results and preserves separate device evidence; probability REVIEW now exits nonzero.
 - **Status:** RESOLVED.
+
+## F-012 — 2026-11-04 — Second-round lifecycle and evidence findings
+
+- **Severity:** P1/P2. **Source:** CodeRabbit full review on `6ee57c96c3a4643bb67104de55a7730c9e13984a`.
+- **Findings:** unloaded terrain records deleted; delivered boss rewards could be re-queued; runtime probability copy could go stale; event evidence ignored test changes; audit logs mixed revisions; Apache/MIT conflict; distant swaps; missing Feather Falling; incomplete schema claim.
+- **Fix:** retain invalid-block journals, restore only undelivered rewards, regenerate/compare probabilities, hash test source, separate CI logs, align Apache-2.0, radius-limit swaps, enchant boots, and scope validation claims accurately. Saddling was also corrected against vanilla pig/strider events.
+- **Regression:** 129/129 tests pass, including dedicated unload, partial-delivery, distance, and rollback cases.
+- **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.

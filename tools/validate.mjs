@@ -3,6 +3,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { EVENTS } from "../src/events/registry.js";
 import table from "../src/config/probabilities.json" with { type: "json" };
+import runtimeTable from "../src/config/probabilities.js";
 import { validateWeights } from "../src/core/random.js";
 const root=process.cwd(), errors=[], checks=[];
 const pass=name=>checks.push(name);
@@ -22,7 +23,7 @@ for(const file of walk("packs/behavior_pack/blocks").filter(f=>f.endsWith(".json
 for(const file of walk("packs/behavior_pack/items").filter(f=>f.endsWith(".json"))){const data=JSON.parse(fs.readFileSync(file,"utf8")),name=data["minecraft:item"].components["minecraft:display_name"];if(typeof name?.value!=="string")errors.push(`${file}: invalid display_name object`);}
 if(!fs.existsSync("packs/resource_pack/texts/language_names.json"))errors.push("Missing custom language names");
 pass("Block geometry, item display names, and custom language registration");
-validateWeights(EVENTS,table);pass("90 registry IDs and 100% tier weight totals");
+validateWeights(EVENTS,table);if(JSON.stringify(runtimeTable)!==JSON.stringify(table))errors.push("Runtime probability table is stale; run npm run build");pass("90 registry IDs, runtime table parity, and 100% tier weight totals");
 const langs={};for(const lang of ["en_US","vi_VN"]){langs[lang]=new Map(fs.readFileSync(`packs/resource_pack/texts/${lang}.lang`,"utf8").split("\n").filter(Boolean).map(l=>{const i=l.indexOf("=");return[l.slice(0,i),l.slice(i+1)];}));}
 for(const event of EVENTS)for(const suffix of ["name","description"])for(const lang of Object.keys(langs))if(!langs[lang].has(`${event.id}.${suffix}`))errors.push(`Missing ${lang}:${event.id}.${suffix}`);
 for(const id of ["lucky","super","chaos"])for(const lang of Object.keys(langs))if(!langs[lang].has(`tile.luckychaos:${id}.name`))errors.push(`Missing block translation ${id}`);

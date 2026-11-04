@@ -7,7 +7,7 @@ import { claimActivation, releaseActivation } from "./core/activation.js";
 import { encodeState, decodeState } from "./core/persistence.js";
 import { freshProgression, discover, migrateProgression, buySkill, xpForLevel, SKILLS } from "./core/progression.js";
 import { EventOperations, isProtectedType } from "./runtime/operations.js";
-import { BossTracker } from "./core/bosses.js";
+import { BossTracker, undeliveredRewards } from "./core/bosses.js";
 import { TerrainJournal } from "./core/terrain-journal.js";
 
 const EVENT_IDS = new Set(EVENTS.map(event => event.id));
@@ -165,7 +165,7 @@ function deliverPendingRewards(player) {
     for (const reward of rewards) { operations.give(player, reward.reward, reward.count); delivered.push(reward); }
     if (delivered.length) text(player, "luckychaos.boss.reward");
   } catch (error) {
-    bossTracker.restorePending(player.id, [...rewards.slice(delivered.length), ...delivered]);
+    bossTracker.restorePending(player.id, undeliveredRewards(rewards, delivered.length));
     console.warn(`[GGLuckyEasy] Pending reward delivery deferred: ${error}`);
   }
 }

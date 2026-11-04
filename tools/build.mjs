@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 const root = process.cwd();
+const probabilityJson = fs.readFileSync(path.join(root, "src/config/probabilities.json"), "utf8");
+fs.writeFileSync(path.join(root, "src/config/probabilities.js"), `// Generated from probabilities.json; edit the JSON then run npm run build.\nexport default ${probabilityJson}`);
 const destination = path.join(root, "packs/behavior_pack/scripts");
 fs.rmSync(destination, { recursive: true, force: true });
 fs.mkdirSync(destination, { recursive: true });

@@ -34,7 +34,8 @@ export class EventOperations {
       const completed = [];
       for (let i = 0; i < changes.length; i++) {
         const [block, old] = changes[i];
-        if (block.isValid && canRestoreTerrain(block.typeId, eventType)) restore(block, old);
+        if (!block.isValid) continue;
+        if (canRestoreTerrain(block.typeId, eventType)) restore(block, old);
         completed.push(records[i].id);
       }
       this.terrainJournal?.remove(completed);
@@ -89,7 +90,14 @@ export class EventOperations {
     }
     ctx.player.addEffect(d.effect, 120 * 20, { amplifier: 0, showParticles: true });
   }
-  bootsEffect(ctx, d) { this.give(ctx.player, d.item, 1); ctx.player.addEffect(d.effect, d.seconds * 20, { amplifier: 1 }); }
+  bootsEffect(ctx, d) {
+    if (d.enchantment) {
+      const inventory = ctx.player.getComponent("minecraft:inventory")?.container, boots = new ItemStack(d.item, 1);
+      boots.getComponent("minecraft:enchantable").addEnchantment({ type: new EnchantmentType(d.enchantment), level: 2 });
+      const remainder = inventory.addItem(boots); if (remainder) ctx.player.dimension.spawnItem(remainder, ctx.player.location);
+    } else this.give(ctx.player, d.item, 1);
+    ctx.player.addEffect(d.effect, d.seconds * 20, { amplifier: 1 });
+  }
   helmetEffect(ctx, d) { this.give(ctx.player, d.item, 1); ctx.player.addEffect(d.effect, d.seconds * 20, { amplifier: 0 }); }
   effectLoot(ctx, d) { ctx.player.addEffect(d.effect, d.seconds * 20, { amplifier: 0 }); this.give(ctx.player, d.item, d.count); }
   effects(ctx, d) { for (const [effect, seconds, level] of d.effects) ctx.player.addEffect(effect, seconds * 20, { amplifier: level - 1 }); }
@@ -118,7 +126,10 @@ export class EventOperations {
   vehicle(ctx, d) {
     const entity = ctx.dimension.spawnEntity(d.entity, above(ctx.location));
     entity.nameTag = d.name;
-    if (d.saddle) entity.addItem(new ItemStack("minecraft:saddle", 1));
+    if (d.saddle) {
+      if (["minecraft:pig", "minecraft:strider"].includes(d.entity)) entity.triggerEvent("minecraft:on_saddled");
+      else entity.addItem(new ItemStack("minecraft:saddle", 1));
+    }
     if (d.item) this.give(ctx.player, d.item, 1);
   }
   vehicleLoot(ctx, d) { this.vehicle(ctx, d); this.give(ctx.player, d.item, d.count); }
@@ -178,9 +189,9 @@ export class EventOperations {
     const items = ctx.dimension.getEntities({ type: "minecraft:item", location: ctx.location, maxDistance: d.radius });
     for (const item of items.slice(0, 32)) item.teleport(ctx.player.location);
   }
-  swap(ctx) {
+  swap(ctx, d) {
     if (!this.settings.pranks) return;
-    const other = this.world.getAllPlayers().find(p => p.id !== ctx.player.id && p.dimension.id === ctx.dimension.id);
+    const other = this.world.getAllPlayers().find(p => p.id !== ctx.player.id && p.dimension.id === ctx.dimension.id && Math.hypot(p.location.x - ctx.location.x, p.location.y - ctx.location.y, p.location.z - ctx.location.z) <= d.radius);
     if (!other) { this.give(ctx.player, "minecraft:potato", 1); return; }
     const a = ctx.player.location, b = other.location;
     other.teleport(a, { dimension: ctx.dimension }); ctx.player.teleport(b, { dimension: other.dimension });

@@ -2,7 +2,7 @@
 const e = (id, en, vi, descriptionEn, descriptionVi, category, polarity, handler, data = {}, cleanup = "none", cost = "low") => ({
   id, name: { en_US: en, vi_VN: vi }, description: { en_US: descriptionEn, vi_VN: descriptionVi },
   category, polarity, handler, data, assets: [], entities: data.entity ? [data.entity] : [], structures: data.structure ? [data.structure] : [], cleanup, cost,
-  validation: `tests/events.test.mjs:${id}; manual: open eligible tier and follow EVENT_CATALOG.md`
+  validation: `tests/runtime-events.test.mjs#operation smoke: ${id}; manual: open eligible tier and follow EVENT_CATALOG.md`
 });
 
 export const EVENTS = [
@@ -20,7 +20,7 @@ export const EVENTS = [
   e("loot_explorer","Explorer Kit","Bộ Thám Hiểm","Maps, a compass, and a recovery compass.","Bản đồ, la bàn và la bàn hồi sinh.","loot","positive","lootMulti",{items:[["minecraft:map",2],["minecraft:compass",1],["minecraft:recovery_compass",1]]}),
 
   e("gear_guardian","Guardian Armor","Giáp Hộ Vệ","Protection armor with resistance.","Giáp bảo hộ kèm kháng sát thương.","equipment","positive","armor",{material:"diamond",effect:"resistance"}),
-  e("gear_swift","Wind Runners","Giày Lướt Gió","Feather-falling boots and speed.","Giày giảm sát thương rơi kèm tốc độ.","equipment","positive","bootsEffect",{item:"minecraft:diamond_boots",effect:"speed",seconds:90}),
+  e("gear_swift","Wind Runners","Giày Lướt Gió","Feather-falling boots and speed.","Giày giảm sát thương rơi kèm tốc độ.","equipment","positive","bootsEffect",{item:"minecraft:diamond_boots",effect:"speed",seconds:90,enchantment:"feather_falling"}),
   e("gear_aqua","Diver Set","Bộ Thợ Lặn","A turtle shell and water breathing.","Mai rùa và khả năng thở dưới nước.","equipment","positive","helmetEffect",{item:"minecraft:turtle_helmet",effect:"water_breathing",seconds:180}),
   e("gear_night","Night Visor","Kính Nhìn Đêm","Night vision and a lantern.","Nhìn đêm và một chiếc đèn lồng.","equipment","positive","effectLoot",{effect:"night_vision",seconds:180,item:"minecraft:lantern",count:1}),
   e("gear_fire","Firewalker Kit","Bộ Đi Trong Lửa","Fire resistance and golden boots.","Kháng lửa và giày vàng.","equipment","positive","bootsEffect",{item:"minecraft:golden_boots",effect:"fire_resistance",seconds:120}),
@@ -63,7 +63,7 @@ export const EVENTS = [
   e("transform_zero_g","Moon Gravity","Trọng Lực Mặt Trăng","Levitation followed by slow falling.","Bay lên rồi rơi chậm.","transformations","neutral","effects",{effects:[["levitation",4,1],["slow_falling",20,1]]}),
   e("transform_speed","Zoomies","Cơn Cuồng Tốc Độ","Extreme temporary speed.","Tốc độ cực cao tạm thời.","transformations","positive","effects",{effects:[["speed",30,4]]}),
 
-  e("prank_swap","Friendship Swap","Hoán Đổi Tình Bạn","Two nearby players safely swap positions.","Hai người chơi gần nhau đổi vị trí an toàn.","pranks","neutral","swap",{}),
+  e("prank_swap","Friendship Swap","Hoán Đổi Tình Bạn","Two nearby players safely swap positions.","Hai người chơi gần nhau đổi vị trí an toàn.","pranks","neutral","swap",{radius:12}),
   e("prank_launch","Surprise Airlines","Hãng Bay Bất Ngờ","The opener rises and lands safely.","Người mở bay lên và hạ cánh an toàn.","pranks","neutral","launch",{}),
   e("prank_fake_diamond","Diamond? Nope","Kim Cương? Không","A diamond turns out to be a potato and a message.","Kim cương hóa ra là khoai tây.","pranks","neutral","loot",{item:"minecraft:potato",count:1}),
   e("prank_chicken_rain","Chicken Forecast","Dự Báo Gà Rơi","Chickens descend with slow falling.","Gà rơi xuống với hiệu ứng rơi chậm.","pranks","neutral","chickenRain",{count:6}),

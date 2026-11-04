@@ -24,6 +24,10 @@ test("containers and critical blocks are protected from terrain replacement",()=
  op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1});
  assert.equal(target.typeId,"minecraft:chest");assert.ok(isProtectedType("minecraft:command_block"));assert.ok(isProtectedType("minecraft:red_shulker_box"));
 });
+test("unloaded terrain retains its journal record for later recovery",()=>{
+ const target=block("minecraft:stone"),journal={records:[],canFit(){return true;},add(r){this.records.push(...r);},remove(ids){if(ids.length)this.records=[];}},op=new EventOperations({}, {terrainDestruction:true},{},journal);
+ op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1});target.isValid=false;scheduled();assert.equal(journal.records.length,1);
+});
 test("journal write failure immediately rolls back temporary edits",()=>{
  const target=block("minecraft:stone"),journal={canFit(){return true;},add(){throw new Error("storage full");}},op=new EventOperations({}, {terrainDestruction:true},{},journal);
  assert.throws(()=>op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1}),/storage full/);assert.equal(target.typeId,"minecraft:stone");

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { BossTracker } from "../src/core/bosses.js";
+import { BossTracker, undeliveredRewards } from "../src/core/bosses.js";
 
 function storage(initial) { let raw = initial; return { read: () => raw, write: value => { raw = value; }, get raw() { return raw; } }; }
 const reward = { reward: "minecraft:diamond", count: 2, opener: "player-A" };
@@ -37,6 +37,10 @@ test("capacity never evicts an older boss or silently drops an offline reward",(
  assert.throws(()=>tracker.track("overflow",reward),/full/);assert.equal(tracker.active.has("entity-0"),true);
  for(let i=0;i<32;i++)tracker.defer("player-A",reward);
  assert.equal(tracker.defer("player-A",reward),false);assert.equal(tracker.pending["player-A"].length,32);
+});
+test("partial delivery restores only undelivered rewards",()=>{
+ const rewards=[reward,{...reward,reward:"minecraft:emerald"},{...reward,reward:"minecraft:gold_ingot"}];
+ assert.deepEqual(undeliveredRewards(rewards,2),[rewards[2]]);assert.deepEqual(undeliveredRewards(rewards,3),[]);
 });
 test("corrupt persisted boss data is bounded and sanitized", () => {
   const store = storage(JSON.stringify({active:{bad:{count:-9},good:reward},pending:{"player-A":[null,reward,"bad"]}}));

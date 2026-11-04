@@ -111,4 +111,4 @@ npm run build
 npm run audit
 ```
 
-Build artifacts and SHA-256 hashes are written to `dist/`; machine-readable evidence is in `evidence/`. See `AGENTS.md`, `COMPATIBILITY.md`, and `TEST_PLAN.md` before changing content. Source is MIT licensed; original generated art and sounds are included in the same project.
+Build artifacts and SHA-256 hashes are written to `dist/`; machine-readable evidence is in `evidence/`. See `AGENTS.md`, `COMPATIBILITY.md`, and `TEST_PLAN.md` before changing content. Source is Apache-2.0 licensed; original generated art and sounds are included in the same project.
