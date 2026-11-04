@@ -52,3 +52,10 @@ test("Friendship Swap never targets a distant player",()=>{
  op.swap({player:f.player,dimension:f.dimension,location:f.player.location},{radius:12});
  assert.equal(f.given.length,1);assert.equal(f.given[0].typeId,"minecraft:potato");
 });
+
+test("Pass the Potato ignores other dimensions and distant players",()=>{
+ const f=fixture(),distant={...f.player,id:"C",location:{x:1000,y:64,z:0}};
+ f.world.getAllPlayers=()=>[f.player,distant];const op=new EventOperations(f.world,{},{});
+ op.partnerGift({player:f.player,dimension:f.dimension,location:f.player.location},{item:"minecraft:potato",count:1,radius:12});
+ assert.equal(f.given.length,1);assert.equal(f.given[0].typeId,"minecraft:potato");
+});

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "runs": 2,
+  "sha256": [
+    "a8a41bca33021f4999f66ef5e6be6f1a0fc92dee21713f8a6df3623041152c46  GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack",
+    "036d3da33ac312a587c2d5df434e7246c8ef740794ab797230f7aaa6ab012161  GGLuckyEasy-Resources-v0.1.0-dev1.mcpack",
+    "35799be5131dfacf24fc5d8fcbf80f9b968cede256482e4b515cbfee1c6a307b  GGLuckyEasy-v0.1.0-dev1.mcaddon"
+  ],
+  "comparison": "Two consecutive clean-input builds"
+}

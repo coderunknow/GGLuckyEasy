@@ -43,10 +43,11 @@ export class EventOperations {
     system.runTimeout(restoreAll, ticks);
   }
 
-  restoreJournaledTerrain() {
+  restoreJournaledTerrain(dueOnly = false) {
     if (!this.terrainJournal) return;
     const completed = [];
     for (const record of this.terrainJournal.records) {
+      if (dueOnly && Number(record.restoreAt) > Date.now()) continue;
       try {
         const dimension = this.world.getDimension(record.dimension), block = dimension.getBlock(record.location);
         if (!block) continue;
@@ -147,7 +148,7 @@ export class EventOperations {
       if (Math.abs(x) + Math.abs(z) < d.radius || Math.abs(x) + Math.abs(z) > d.radius + 1) continue;
       const loc = above(ctx.location, 0); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (target && !protectedBlock(target) && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.getPermutation()]); target.setType(block); }
+      if (target && !this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) && !protectedBlock(target) && (airLike(target) || this.settings.terrainDestruction)) { changes.push([target, target.getPermutation()]); target.setType(block); }
     }
     this.scheduleTerrainRestore(ctx, changes, block, 30 * 20);
   }
@@ -157,7 +158,7 @@ export class EventOperations {
     for (let x = -d.radius; x <= d.radius; x++) for (let z = -d.radius; z <= d.radius; z++) {
       const loc = above(ctx.location, d.height); loc.x += x; loc.z += z;
       const target = ctx.dimension.getBlock(loc);
-      if (protectedBlock(target) || (!airLike(target) && !this.settings.terrainDestruction)) continue;
+      if (this.terrainJournal?.hasBlock?.(ctx.dimension.id, target.location) || protectedBlock(target) || (!airLike(target) && !this.settings.terrainDestruction)) continue;
       changes.push([target, target.getPermutation()]); target.setType(d.block);
     }
     this.scheduleTerrainRestore(ctx, changes, d.block, d.seconds * 20);
@@ -221,7 +222,7 @@ export class EventOperations {
   }
   party(ctx) { this.give(ctx.player, "minecraft:cake", 1); this.soundShow(ctx); for (let i = 0; i < 3; i++) ctx.dimension.spawnEntity("minecraft:fireworks_rocket", above(ctx.location, i + 1)); }
   partnerGift(ctx, d) {
-    const other = this.world.getAllPlayers().find(p => p.id !== ctx.player.id);
+    const other = this.world.getAllPlayers().find(p => p.id !== ctx.player.id && p.dimension.id === ctx.dimension.id && Math.hypot(p.location.x - ctx.location.x, p.location.y - ctx.location.y, p.location.z - ctx.location.z) <= d.radius);
     this.give(other ?? ctx.player, d.item, d.count);
   }
 

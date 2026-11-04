@@ -121,3 +121,11 @@ Append-only. Resolved failures remain recorded.
 - **Fix:** retain invalid-block journals, restore only undelivered rewards, regenerate/compare probabilities, hash test source, separate CI logs, align Apache-2.0, radius-limit swaps, enchant boots, and scope validation claims accurately. Saddling was also corrected against vanilla pig/strider events.
 - **Regression:** 129/129 tests pass, including dedicated unload, partial-delivery, distance, and rollback cases.
 - **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.
+
+## F-013 — 2026-11-04 — Final-head authorization and durability findings
+
+- **Severity:** P1/P2. **Source:** CodeRabbit full review on `18d6e1a8506dca64fffcbb20ebc5e1c8a19a550e`.
+- **Findings:** Custom permission incorrectly exceeded Operator; online give failure could lose a consumed boss reward; due terrain had no same-session retry; overlapping terrain edits could restore an intermediate block; distant potato gifts; ambiguous merge exception; unsupported reproducibility claim; ignored pack files; stale PASS validation evidence; missing-tier validation gap.
+- **Fix:** exact/rechecked Operator permission, online delivery fallback, five-second due-only journal retry, per-location overlap prevention, nearby gift filtering, explicit merge exception, two-build hash test, Git tracked-file packaging, caught validation errors, and mandatory tier checks.
+- **Regression:** 132/132 tests and two identical builds pass. New overlap, due-time, and distant-gift cases are covered.
+- **Status:** RESOLVED in source; retail behavior remains UNVERIFIED.

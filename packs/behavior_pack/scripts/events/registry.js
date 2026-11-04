@@ -65,13 +65,13 @@ export const EVENTS = [
 
   e("prank_swap","Friendship Swap","Hoán Đổi Tình Bạn","Two nearby players safely swap positions.","Hai người chơi gần nhau đổi vị trí an toàn.","pranks","neutral","swap",{radius:12}),
   e("prank_launch","Surprise Airlines","Hãng Bay Bất Ngờ","The opener rises and lands safely.","Người mở bay lên và hạ cánh an toàn.","pranks","neutral","launch",{}),
-  e("prank_fake_diamond","Diamond? Nope","Kim Cương? Không","A diamond turns out to be a potato and a message.","Kim cương hóa ra là khoai tây.","pranks","neutral","loot",{item:"minecraft:potato",count:1}),
+  e("prank_fake_diamond","Diamond? Nope","Kim Cương? Không","A diamond turns out to be a potato and a message.","Kim cương hóa ra là khoai tây.","pranks","neutral","loot",{item:"minecraft:potato",count:1,radius:12}),
   e("prank_chicken_rain","Chicken Forecast","Dự Báo Gà Rơi","Chickens descend with slow falling.","Gà rơi xuống với hiệu ứng rơi chậm.","pranks","neutral","chickenRain",{count:6}),
   e("prank_sound","Invisible Applause","Tiếng Vỗ Tay Vô Hình","A comic sound sequence without damage.","Chuỗi âm thanh vui không gây sát thương.","pranks","neutral","soundShow",{}),
   e("prank_pumpkin","Fashion Emergency","Thảm Họa Thời Trang","A carved pumpkin appears as a gift.","Một quả bí ngô khắc xuất hiện làm quà.","pranks","neutral","loot",{item:"minecraft:carved_pumpkin",count:1}),
   e("prank_teleport","Wrong Door","Nhầm Cửa","A short random teleport to a safe nearby surface.","Dịch chuyển ngắn tới mặt đất an toàn gần đó.","pranks","neutral","randomTeleport",{radius:12}),
   e("prank_party","Unexpected Party","Tiệc Bất Ngờ","Firework visuals and a cake.","Pháo hoa và một chiếc bánh.","pranks","positive","party",{}),
-  e("prank_partner_gift","Pass the Potato","Chuyền Khoai Tây","The other nearby player receives a potato.","Người chơi gần đó nhận một củ khoai tây.","pranks","neutral","partnerGift",{item:"minecraft:potato",count:1}),
+  e("prank_partner_gift","Pass the Potato","Chuyền Khoai Tây","The other nearby player receives a potato.","Người chơi gần đó nhận một củ khoai tây.","pranks","neutral","partnerGift",{item:"minecraft:potato",count:1,radius:12}),
   e("prank_name","Ego Boost","Tăng Cái Tôi","A harmless named silverfish fan club appears.","Một hội hâm mộ silverfish vô hại xuất hiện.","pranks","negative","spawnRing",{entity:"minecraft:silverfish",name:"Tiny Fan",count:5,radius:4}),
 
   e("boss_slime","Baron Bounce","Nam Tước Nảy","A large named slime boss and reward.","Trùm slime lớn có tên và phần thưởng.","bosses","special","boss",{entity:"minecraft:slime",name:"Baron Bounce",health:40,size:4,reward:"minecraft:slime_block",count:3}),

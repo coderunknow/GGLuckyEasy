@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { TerrainJournal } from "../src/core/terrain-journal.js";
 let scheduled;
 const source=fs.readFileSync("src/runtime/operations.js","utf8").replace('import { ItemStack, EnchantmentType, BlockPermutation, system } from "@minecraft/server";',`const ItemStack=class{};const EnchantmentType=class{};const BlockPermutation=class{static resolve(id){return{type:{id}};}};const system=globalThis.__safetySystem;`);
 globalThis.__safetySystem={runTimeout(callback){scheduled=callback;}};
@@ -33,3 +34,16 @@ test("journal write failure immediately rolls back temporary edits",()=>{
  assert.throws(()=>op.terrainPatch(context(target),{block:"minecraft:cobweb",radius:0,height:0,seconds:1}),/storage full/);assert.equal(target.typeId,"minecraft:stone");
 });
 test("restoration requires the event block to still be present",()=>{assert.equal(canRestoreTerrain("minecraft:stone","minecraft:cobweb"),false);});
+test("overlapping temporary events never replace the original terrain snapshot",()=>{
+ const target=block("minecraft:stone"),journal=new TerrainJournal(()=>undefined,()=>{}),op=new EventOperations({}, {terrainDestruction:true},{},journal);
+ op.terrainPatch(context(target),{block:"minecraft:magma",radius:0,height:0,seconds:1});
+ assert.equal(target.typeId,"minecraft:magma");
+ op.terrainPatch(context(target),{block:"minecraft:ice",radius:0,height:0,seconds:1});
+ assert.equal(target.typeId,"minecraft:magma");assert.equal(journal.records[0].oldType,"minecraft:stone");
+});
+test("due-only journal recovery does not restore future records",()=>{
+ const target=block("minecraft:cobweb"),journal=new TerrainJournal(()=>undefined,()=>{});
+ journal.add([{id:"future",dimension:"overworld",location:target.location,oldType:"minecraft:stone",oldStates:{},eventType:"minecraft:cobweb",restoreAt:Date.now()+60000}]);
+ const op=new EventOperations({getDimension(){return {getBlock(){return target;}};}},{},{},journal);op.restoreJournaledTerrain(true);
+ assert.equal(target.typeId,"minecraft:cobweb");assert.equal(journal.records.length,1);
+});

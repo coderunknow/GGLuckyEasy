@@ -12,7 +12,7 @@
 - Touch-friendly Chaos Compass guide, progression, collection, and operator configuration forms.
 - Original block/item artwork, pack icons, three synthesized tier sounds, English and Vietnamese localization.
 - Bounded terrain events, configurable destruction/pranks, structure-volume validation, and temporary terrain restoration.
-- Reproducible `.mcaddon`/`.mcpack` build, SHA-256 sums, 129 automated tests, 600,000 probability draws, validation/build evidence, and GitHub Actions audit.
+- Reproducible `.mcaddon`/`.mcpack` build, SHA-256 sums, 132 automated tests, 600,000 probability draws, validation/build evidence, and GitHub Actions audit.
 
 ### Changed
 

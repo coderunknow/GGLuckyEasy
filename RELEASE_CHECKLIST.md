@@ -16,11 +16,11 @@ Statuses preserve the difference between automated evidence and unavailable reta
 | 10 | Co-op/Versus audited | PASS (source) / BLOCKED (two-client) | Reward attribution and independent persistence reviewed |
 | 11 | No forbidden competition systems | PASS | Source and validator policy scans |
 | 12 | Real multiplayer tests | BLOCKED | No two Bedrock clients; disclosed prerelease exception |
-| 13 | No known unresolved P0/P1 defects | PASS | F-008 through F-011 remediated and regression-tested |
+| 13 | No known unresolved P0/P1 defects | PASS | F-008 through F-012 remediated and regression-tested |
 | 14 | Stable compatibility checks | PASS (declarations/docs) / UNVERIFIED (device) | 1.26.30; server 2.8.0; UI 2.1.0; no experiments |
 | 15 | CI on final PR head | IN PROGRESS | Must pass after remediation push |
-| 16 | Final source audit | IN PROGRESS | Full local audit must be rerun on final tree |
-| 17 | Current-head CodeRabbit review and findings | IN PROGRESS | Baseline full review FINISHED with 15 findings; fixes require new full review |
+| 16 | Final source audit | PASS | 132 tests, typecheck, distribution, semantic archive, two-build comparison, npm audit, source review |
+| 17 | Current-head CodeRabbit review and findings | IN PROGRESS | 35 findings across three completed full reviews addressed; new consolidated head requires review |
 | 18 | Actual release artifacts verified | PASS (static) / UNVERIFIED (import) | Final names/hashes/semantic archive checks; real import unavailable |
 | 19 | Post-merge CI and final-commit artifact rebuild | NOT STARTED | Required after PR merge |
 | 20 | Published assets match local SHA-256 | NOT STARTED | Required after prerelease upload |

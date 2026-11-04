@@ -14,7 +14,7 @@ Date: 2026-11-04. Baseline: `b30d57824255615f7aaae13e9f6466a38bff061c`; final SH
 
 ## Verification
 
-Current suite: 129 automated tests, 90/90 mock event consequences, stable API typecheck, 600,000 seeded probability draws, npm audit zero vulnerabilities, semantic archive inspection, and host-side selection benchmark. Final command/logs are regenerated after the last source change.
+Current suite: 132 automated tests, 90/90 mock event consequences, stable API typecheck, 600,000 seeded probability draws, npm audit zero vulnerabilities, semantic archive inspection, and host-side selection benchmark. Final command/logs are regenerated after the last source change.
 
 Real Bedrock import/gameplay, Android/iOS/BlueStacks, two-client behavior, and mobile performance remain UNVERIFIED/BLOCKED. These are disclosed prerelease limitations, not passes.
 

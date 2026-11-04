@@ -45,7 +45,7 @@ function getProgress(player) {
   } catch { return freshProgression(); }
 }
 function saveProgress(player, progress) { world.setDynamicProperty(progressKey(player), encodeState(progress)); }
-function isAdmin(player) { return player.playerPermissionLevel >= PlayerPermissionLevel.Operator; }
+function isAdmin(player) { return player.playerPermissionLevel === PlayerPermissionLevel.Operator; }
 
 function openBlock(event) {
   const tier = BLOCK_TIERS[event.brokenBlockPermutation.type.id];
@@ -126,13 +126,14 @@ async function showSettings(player) {
     .toggle({ translate: "luckychaos.settings.terrain" }, { defaultValue: settings.terrainDestruction })
     .toggle({ translate: "luckychaos.settings.pranks" }, { defaultValue: settings.pranks })
     .toggle({ translate: "luckychaos.settings.build_arena" }, { defaultValue: false });
-  const response = await form.show(player); if (response.canceled) return;
+  const response = await form.show(player); if (response.canceled || !isAdmin(player)) return;
   const [mode, profile, terrainDestruction, pranks, buildArena] = response.formValues;
   settings = { ...settings, mode: mode === 1 ? "arena" : "survival", profile: profile === 1 ? "versus" : "coop", terrainDestruction: terrainDestruction === true, pranks: pranks === true };
   saveSettings(); text(player, "luckychaos.settings.saved");
   if (buildArena) system.run(() => buildArenaAt(player));
 }
 function buildArenaAt(player) {
+  if (!isAdmin(player)) return;
   try {
     const base = { x: Math.floor(player.location.x) - 12, y: Math.floor(player.location.y) - 1, z: Math.floor(player.location.z) - 12 };
     // Validate the complete 25×25×5 volume before the first write. The arena
@@ -153,7 +154,12 @@ world.afterEvents.itemUse.subscribe(event => { if (event.itemStack.typeId === "l
 world.afterEvents.entityDie.subscribe(event => {
   const boss = bossTracker.consumeDeath(event.deadEntity.id); if (!boss) return;
   const opener = world.getAllPlayers().find(p => p.id === boss.opener);
-  if (opener) { operations.give(opener, boss.reward, boss.count); text(opener, "luckychaos.boss.reward"); }
+  if (opener) {
+    try { operations.give(opener, boss.reward, boss.count); text(opener, "luckychaos.boss.reward"); }
+    catch {
+      if (!bossTracker.defer(boss.opener, boss)) event.deadEntity.dimension.spawnItem(new ItemStack(boss.reward, boss.count), event.deadEntity.location);
+    }
+  }
   else if (!bossTracker.defer(boss.opener, boss)) {
     // Preserve an overflowing offline reward in the world rather than deleting it.
     event.deadEntity.dimension.spawnItem(new ItemStack(boss.reward, boss.count), event.deadEntity.location);
@@ -170,6 +176,7 @@ function deliverPendingRewards(player) {
   }
 }
 world.afterEvents.worldLoad.subscribe(() => { loadSettings(); terrainJournal.reload(); operations.restoreJournaledTerrain(); for (const player of world.getAllPlayers()) { if (!world.getDynamicProperty(progressKey(player))) saveProgress(player, freshProgression()); deliverPendingRewards(player); } });
+system.runInterval(() => operations.restoreJournaledTerrain(true), 100);
 world.afterEvents.playerSpawn.subscribe(event => {
   if (!event.initialSpawn) return;
   if (!world.getDynamicProperty(progressKey(event.player))) { saveProgress(event.player, freshProgression()); text(event.player, "luckychaos.message.welcome"); }
