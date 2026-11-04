@@ -1,0 +1,129 @@
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 audit
+> npm run validate && npm test && npm run test:probability && npm run build
+
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 validate
+> node tools/validate.mjs
+
+PASS 18 JSON files parsed
+PASS Manifest UUIDs, dependencies, stable API pins, and engine version
+PASS 90 registry IDs and 100% tier weight totals
+PASS English/Vietnamese event and block localization coverage
+PASS Texture atlases and original sound references resolve
+PASS Tier activation mapping and free-play policy scan
+PASS Relative module imports resolve
+PASSED: 41 files, 90 events
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: PRNG is reproducible
+ok 1 - PRNG is reproducible
+  ---
+  duration_ms: 1.656379
+  type: 'test'
+  ...
+# Subtest: all tier probability tables are complete and total 100%
+ok 2 - all tier probability tables are complete and total 100%
+  ---
+  duration_ms: 0.476983
+  type: 'test'
+  ...
+# Subtest: selection is deterministic and can reach every eligible event
+ok 3 - selection is deterministic and can reach every eligible event
+  ---
+  duration_ms: 821.39078
+  type: 'test'
+  ...
+# Subtest: level curve grants points without grinding thousands of openings
+ok 4 - level curve grants points without grinding thousands of openings
+  ---
+  duration_ms: 0.410041
+  type: 'test'
+  ...
+# Subtest: discovery XP is awarded once while opening XP continues
+ok 5 - discovery XP is awarded once while opening XP continues
+  ---
+  duration_ms: 0.442637
+  type: 'test'
+  ...
+# Subtest: skill costs and caps are enforced
+ok 6 - skill costs and caps are enforced
+  ---
+  duration_ms: 0.669492
+  type: 'test'
+  ...
+# Subtest: migration preserves old XP and malformed data gets a safe fresh state
+ok 7 - migration preserves old XP and malformed data gets a safe fresh state
+  ---
+  duration_ms: 0.386622
+  type: 'test'
+  ...
+# Subtest: player state cloning prevents co-op/versus cross-attribution
+ok 8 - player state cloning prevents co-op/versus cross-attribution
+  ---
+  duration_ms: 0.237711
+  type: 'test'
+  ...
+# Subtest: exactly 90 non-placeholder unique event definitions
+ok 9 - exactly 90 non-placeholder unique event definitions
+  ---
+  duration_ms: 1.319503
+  type: 'test'
+  ...
+# Subtest: every event maps to an implemented operation and is eligible in a tier
+ok 10 - every event maps to an implemented operation and is eligible in a tier
+  ---
+  duration_ms: 0.346674
+  type: 'test'
+  ...
+# Subtest: all ten required categories and four classifications are represented
+ok 11 - all ten required categories and four classifications are represented
+  ---
+  duration_ms: 1.846602
+  type: 'test'
+  ...
+# Subtest: all structure templates stay within the 160-cell mobile budget
+ok 12 - all structure templates stay within the 160-cell mobile budget
+  ---
+  duration_ms: 0.742879
+  type: 'test'
+  ...
+# Subtest: both localization files include every event name and description
+ok 13 - both localization files include every event name and description
+  ---
+  duration_ms: 4.467149
+  type: 'test'
+  ...
+# Subtest: custom content never uses the vanilla namespace
+ok 14 - custom content never uses the vanilla namespace
+  ---
+  duration_ms: 0.164289
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 977.212637
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test:probability
+> node tools/probability-test.mjs 200000
+
+lucky: 200000 draws, 83 eligible, max |z|=2.492, chi2=62.91 (PASSED)
+super: 200000 draws, 89 eligible, max |z|=2.813, chi2=92.98 (PASSED)
+chaos: 200000 draws, 90 eligible, max |z|=2.237, chi2=76.18 (PASSED)
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 build
+> node tools/build.mjs
+
+BUILD dist/Lucky-Chaos-Behavior-v0.1.0-dev1.mcpack 24817 bytes sha256=069f577d733d3ed708dee5adea622d123b451d680e94bd16ab87df94ed8010a6
+BUILD dist/Lucky-Chaos-Resources-v0.1.0-dev1.mcpack 29821 bytes sha256=dcbae1026e7b6ee01d85ec1c9a905e42f90dc6c69eb683606513981a53c4e516
+BUILD dist/Lucky-Chaos-v0.1.0-dev1.mcaddon 55846 bytes sha256=988c8d52f97a278221e4082d88b3c56ea36c3b876c1b2f734ef56930b51b818c
+PASS mcaddon inspected: 41 entries, CRC valid

@@ -1,0 +1,27 @@
+{
+  "resource_pack_name": "luckychaos",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "luckychaos_chaos_compass": {
+      "textures": "textures/items/chaos_compass"
+    },
+    "luckychaos_chaos_shard": {
+      "textures": "textures/items/chaos_shard"
+    },
+    "luckychaos_lucky_coin": {
+      "textures": "textures/items/lucky_coin"
+    },
+    "luckychaos_meme_token": {
+      "textures": "textures/items/meme_token"
+    },
+    "luckychaos_star_fragment": {
+      "textures": "textures/items/star_fragment"
+    },
+    "luckychaos_prank_badge": {
+      "textures": "textures/items/prank_badge"
+    },
+    "luckychaos_chaos_crown": {
+      "textures": "textures/items/chaos_crown"
+    }
+  }
+}

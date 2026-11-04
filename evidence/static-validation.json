@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-04T12:13:30.334Z",
+  "status": "PASSED",
+  "checks": [
+    "20 JSON files parsed",
+    "Manifest UUIDs, dependencies, stable API pins, and engine version",
+    "Block geometry, item display names, and custom language registration",
+    "90 registry IDs, runtime table parity, and 100% tier weight totals",
+    "English/Vietnamese event and block localization coverage",
+    "Texture atlases and original sound references resolve",
+    "Tier activation mapping and free-play policy scan",
+    "Relative module imports resolve"
+  ],
+  "errors": [],
+  "filesScanned": 57,
+  "eventCount": 90
+}

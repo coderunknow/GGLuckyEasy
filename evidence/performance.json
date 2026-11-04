@@ -1,0 +1,16 @@
+{
+  "environment": "Node v22.22.3 on Linux (not mobile/Bedrock)",
+  "draws": 600000,
+  "elapsedMs": 2512.070689,
+  "drawsPerSecond": 238846.78191076173,
+  "heapDeltaBytes": 903384,
+  "lastEvent": "gear_night",
+  "limits": {
+    "structureCells": 160,
+    "temporaryTerrainRecords": 64,
+    "activeBossRecords": 64,
+    "pendingRewardsPerPlayer": 32,
+    "magnetItems": 32,
+    "chickenRain": 6
+  }
+}

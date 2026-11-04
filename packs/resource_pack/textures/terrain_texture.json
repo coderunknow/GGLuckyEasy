@@ -1,0 +1,17 @@
+{
+  "resource_pack_name": "luckychaos",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "luckychaos_lucky": {
+      "textures": "textures/blocks/lucky_lucky_block"
+    },
+    "luckychaos_super": {
+      "textures": "textures/blocks/super_lucky_block"
+    },
+    "luckychaos_chaos": {
+      "textures": "textures/blocks/chaos_lucky_block"
+    }
+  }
+}

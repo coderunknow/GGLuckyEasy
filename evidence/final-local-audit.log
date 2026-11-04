@@ -1,0 +1,859 @@
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 audit
+> npm run typecheck && npm run validate && npm test && npm run test:probability && npm run build && npm run test:reproducibility
+
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 typecheck
+> tsc -p tsconfig.json
+
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 validate
+> node tools/validate.mjs
+
+PASS 20 JSON files parsed
+PASS Manifest UUIDs, dependencies, stable API pins, and engine version
+PASS Block geometry, item display names, and custom language registration
+PASS 90 registry IDs, runtime table parity, and 100% tier weight totals
+PASS English/Vietnamese event and block localization coverage
+PASS Texture atlases and original sound references resolve
+PASS Tier activation mapping and free-play policy scan
+PASS Relative module imports resolve
+PASSED: 57 files, 90 events
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: one coordinate cannot activate twice while in flight
+ok 1 - one coordinate cannot activate twice while in flight
+  ---
+  duration_ms: 0.580336
+  type: 'test'
+  ...
+# Subtest: a later block at the same coordinate activates after release
+ok 2 - a later block at the same coordinate activates after release
+  ---
+  duration_ms: 0.126879
+  type: 'test'
+  ...
+# Subtest: different dimensions and coordinates are independent
+ok 3 - different dimensions and coordinates are independent
+  ---
+  duration_ms: 0.081302
+  type: 'test'
+  ...
+# Subtest: active boss and owner survive a complete tracker reload
+ok 4 - active boss and owner survive a complete tracker reload
+  ---
+  duration_ms: 1.222913
+  type: 'test'
+  ...
+# Subtest: offline reward is queued once and survives reload until taken
+ok 5 - offline reward is queued once and survives reload until taken
+  ---
+  duration_ms: 0.34682
+  type: 'test'
+  ...
+# Subtest: failed delivery can restore the complete pending outbox
+ok 6 - failed delivery can restore the complete pending outbox
+  ---
+  duration_ms: 1.126478
+  type: 'test'
+  ...
+# Subtest: unknown entity deaths cannot consume or duplicate another reward
+ok 7 - unknown entity deaths cannot consume or duplicate another reward
+  ---
+  duration_ms: 0.171081
+  type: 'test'
+  ...
+# Subtest: capacity never evicts an older boss or silently drops an offline reward
+ok 8 - capacity never evicts an older boss or silently drops an offline reward
+  ---
+  duration_ms: 2.826786
+  type: 'test'
+  ...
+# Subtest: partial delivery restores only undelivered rewards
+ok 9 - partial delivery restores only undelivered rewards
+  ---
+  duration_ms: 0.194149
+  type: 'test'
+  ...
+# Subtest: corrupt persisted boss data is bounded and sanitized
+ok 10 - corrupt persisted boss data is bounded and sanitized
+  ---
+  duration_ms: 0.191109
+  type: 'test'
+  ...
+# Subtest: PRNG is reproducible
+ok 11 - PRNG is reproducible
+  ---
+  duration_ms: 1.268048
+  type: 'test'
+  ...
+# Subtest: all tier probability tables are complete and total 100%
+ok 12 - all tier probability tables are complete and total 100%
+  ---
+  duration_ms: 0.383224
+  type: 'test'
+  ...
+# Subtest: selection is deterministic and can reach every eligible event
+ok 13 - selection is deterministic and can reach every eligible event
+  ---
+  duration_ms: 609.723092
+  type: 'test'
+  ...
+# Subtest: level curve grants points without grinding thousands of openings
+ok 14 - level curve grants points without grinding thousands of openings
+  ---
+  duration_ms: 0.426861
+  type: 'test'
+  ...
+# Subtest: discovery XP is awarded once while opening XP continues
+ok 15 - discovery XP is awarded once while opening XP continues
+  ---
+  duration_ms: 0.274103
+  type: 'test'
+  ...
+# Subtest: skill costs and caps are enforced
+ok 16 - skill costs and caps are enforced
+  ---
+  duration_ms: 0.390723
+  type: 'test'
+  ...
+# Subtest: migration preserves old XP and malformed data gets a safe fresh state
+ok 17 - migration preserves old XP and malformed data gets a safe fresh state
+  ---
+  duration_ms: 0.262935
+  type: 'test'
+  ...
+# Subtest: malformed v1 state is sanitized and discoveries are deduplicated
+ok 18 - malformed v1 state is sanitized and discoveries are deduplicated
+  ---
+  duration_ms: 0.169499
+  type: 'test'
+  ...
+# Subtest: player state cloning prevents co-op/versus cross-attribution
+ok 19 - player state cloning prevents co-op/versus cross-attribution
+  ---
+  duration_ms: 0.295622
+  type: 'test'
+  ...
+# Subtest: exactly 90 non-placeholder unique event definitions
+ok 20 - exactly 90 non-placeholder unique event definitions
+  ---
+  duration_ms: 2.062708
+  type: 'test'
+  ...
+# Subtest: every event maps to an implemented operation and is eligible in a tier
+ok 21 - every event maps to an implemented operation and is eligible in a tier
+  ---
+  duration_ms: 0.248349
+  type: 'test'
+  ...
+# Subtest: all ten required categories and four classifications are represented
+ok 22 - all ten required categories and four classifications are represented
+  ---
+  duration_ms: 0.665267
+  type: 'test'
+  ...
+# Subtest: all structure templates stay within the 160-cell mobile budget
+ok 23 - all structure templates stay within the 160-cell mobile budget
+  ---
+  duration_ms: 0.494443
+  type: 'test'
+  ...
+# Subtest: both localization files include every event name and description
+ok 24 - both localization files include every event name and description
+  ---
+  duration_ms: 3.347915
+  type: 'test'
+  ...
+# Subtest: Vietnamese strings do not contain historical mixed-case diacritic typos
+ok 25 - Vietnamese strings do not contain historical mixed-case diacritic typos
+  ---
+  duration_ms: 0.443923
+  type: 'test'
+  ...
+# Subtest: custom content never uses the vanilla namespace
+ok 26 - custom content never uses the vanilla namespace
+  ---
+  duration_ms: 0.156611
+  type: 'test'
+  ...
+# Subtest: progression and Unicode settings round-trip as primitive JSON strings
+ok 27 - progression and Unicode settings round-trip as primitive JSON strings
+  ---
+  duration_ms: 1.013821
+  type: 'test'
+  ...
+# Subtest: missing, malformed, or non-string dynamic properties use non-destructive fallback
+ok 28 - missing, malformed, or non-string dynamic properties use non-destructive fallback
+  ---
+  duration_ms: 0.286904
+  type: 'test'
+  ...
+# Subtest: complete discovery state remains below Bedrock's 32,767-character property limit
+ok 29 - complete discovery state remains below Bedrock's 32,767-character property limit
+  ---
+  duration_ms: 0.193522
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_emerald_cache
+ok 30 - operation smoke: loot_emerald_cache
+  ---
+  duration_ms: 2.262797
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_diamond_pouch
+ok 31 - operation smoke: loot_diamond_pouch
+  ---
+  duration_ms: 0.199927
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_netherite_scrap
+ok 32 - operation smoke: loot_netherite_scrap
+  ---
+  duration_ms: 0.074166
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_golden_feast
+ok 33 - operation smoke: loot_golden_feast
+  ---
+  duration_ms: 0.099854
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_enchanted_apple
+ok 34 - operation smoke: loot_enchanted_apple
+  ---
+  duration_ms: 0.075322
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_totem
+ok 35 - operation smoke: loot_totem
+  ---
+  duration_ms: 0.121682
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_elytra
+ok 36 - operation smoke: loot_elytra
+  ---
+  duration_ms: 0.062806
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_beacon
+ok 37 - operation smoke: loot_beacon
+  ---
+  duration_ms: 0.082531
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_books
+ok 38 - operation smoke: loot_books
+  ---
+  duration_ms: 0.331976
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_music
+ok 39 - operation smoke: loot_music
+  ---
+  duration_ms: 0.266794
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_ocean
+ok 40 - operation smoke: loot_ocean
+  ---
+  duration_ms: 0.115595
+  type: 'test'
+  ...
+# Subtest: operation smoke: loot_explorer
+ok 41 - operation smoke: loot_explorer
+  ---
+  duration_ms: 0.052075
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_guardian
+ok 42 - operation smoke: gear_guardian
+  ---
+  duration_ms: 0.136732
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_swift
+ok 43 - operation smoke: gear_swift
+  ---
+  duration_ms: 0.150762
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_aqua
+ok 44 - operation smoke: gear_aqua
+  ---
+  duration_ms: 0.054463
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_night
+ok 45 - operation smoke: gear_night
+  ---
+  duration_ms: 0.049431
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_fire
+ok 46 - operation smoke: gear_fire
+  ---
+  duration_ms: 0.03576
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_jump
+ok 47 - operation smoke: gear_jump
+  ---
+  duration_ms: 0.062136
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_utility
+ok 48 - operation smoke: gear_utility
+  ---
+  duration_ms: 0.035447
+  type: 'test'
+  ...
+# Subtest: operation smoke: gear_saturation
+ok 49 - operation smoke: gear_saturation
+  ---
+  duration_ms: 0.038564
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_allay
+ok 50 - operation smoke: mob_allay
+  ---
+  duration_ms: 0.181231
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_cat
+ok 51 - operation smoke: mob_cat
+  ---
+  duration_ms: 0.046415
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_wolf
+ok 52 - operation smoke: mob_wolf
+  ---
+  duration_ms: 0.038825
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_axolotl
+ok 53 - operation smoke: mob_axolotl
+  ---
+  duration_ms: 0.042604
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_sniffer
+ok 54 - operation smoke: mob_sniffer
+  ---
+  duration_ms: 0.050254
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_zombie_party
+ok 55 - operation smoke: mob_zombie_party
+  ---
+  duration_ms: 0.112284
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_skeleton_ring
+ok 56 - operation smoke: mob_skeleton_ring
+  ---
+  duration_ms: 0.105884
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_slime_stack
+ok 57 - operation smoke: mob_slime_stack
+  ---
+  duration_ms: 0.056149
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_phantom
+ok 58 - operation smoke: mob_phantom
+  ---
+  duration_ms: 0.076406
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_creeper_confetti
+ok 59 - operation smoke: mob_creeper_confetti
+  ---
+  duration_ms: 0.047763
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_bee_swarm
+ok 60 - operation smoke: mob_bee_swarm
+  ---
+  duration_ms: 0.04126
+  type: 'test'
+  ...
+# Subtest: operation smoke: mob_iron_golem
+ok 61 - operation smoke: mob_iron_golem
+  ---
+  duration_ms: 0.039072
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_anvil
+ok 62 - operation smoke: trap_anvil
+  ---
+  duration_ms: 0.191075
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_lava_ring
+ok 63 - operation smoke: trap_lava_ring
+  ---
+  duration_ms: 1.213239
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_tnt
+ok 64 - operation smoke: trap_tnt
+  ---
+  duration_ms: 0.9151
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_web
+ok 65 - operation smoke: trap_web
+  ---
+  duration_ms: 0.276146
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_ice
+ok 66 - operation smoke: trap_ice
+  ---
+  duration_ms: 0.164423
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_magma
+ok 67 - operation smoke: trap_magma
+  ---
+  duration_ms: 0.128756
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_pit
+ok 68 - operation smoke: trap_pit
+  ---
+  duration_ms: 0.904567
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_lightning
+ok 69 - operation smoke: trap_lightning
+  ---
+  duration_ms: 0.240528
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_poison
+ok 70 - operation smoke: trap_poison
+  ---
+  duration_ms: 0.059393
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_blind
+ok 71 - operation smoke: trap_blind
+  ---
+  duration_ms: 0.0379
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_void_fear
+ok 72 - operation smoke: trap_void_fear
+  ---
+  duration_ms: 0.099221
+  type: 'test'
+  ...
+# Subtest: operation smoke: trap_explosion
+ok 73 - operation smoke: trap_explosion
+  ---
+  duration_ms: 0.349809
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_tiny
+ok 74 - operation smoke: transform_tiny
+  ---
+  duration_ms: 0.046654
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_giant
+ok 75 - operation smoke: transform_giant
+  ---
+  duration_ms: 0.035622
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_bouncy
+ok 76 - operation smoke: transform_bouncy
+  ---
+  duration_ms: 0.034973
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_ghost
+ok 77 - operation smoke: transform_ghost
+  ---
+  duration_ms: 0.033456
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_fish
+ok 78 - operation smoke: transform_fish
+  ---
+  duration_ms: 0.033537
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_magnet
+ok 79 - operation smoke: transform_magnet
+  ---
+  duration_ms: 0.117787
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_zero_g
+ok 80 - operation smoke: transform_zero_g
+  ---
+  duration_ms: 0.037458
+  type: 'test'
+  ...
+# Subtest: operation smoke: transform_speed
+ok 81 - operation smoke: transform_speed
+  ---
+  duration_ms: 0.035087
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_swap
+ok 82 - operation smoke: prank_swap
+  ---
+  duration_ms: 0.110192
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_launch
+ok 83 - operation smoke: prank_launch
+  ---
+  duration_ms: 0.047086
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_fake_diamond
+ok 84 - operation smoke: prank_fake_diamond
+  ---
+  duration_ms: 0.035422
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_chicken_rain
+ok 85 - operation smoke: prank_chicken_rain
+  ---
+  duration_ms: 0.074106
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_sound
+ok 86 - operation smoke: prank_sound
+  ---
+  duration_ms: 0.092971
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_pumpkin
+ok 87 - operation smoke: prank_pumpkin
+  ---
+  duration_ms: 0.041684
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_teleport
+ok 88 - operation smoke: prank_teleport
+  ---
+  duration_ms: 0.175686
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_party
+ok 89 - operation smoke: prank_party
+  ---
+  duration_ms: 0.126283
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_partner_gift
+ok 90 - operation smoke: prank_partner_gift
+  ---
+  duration_ms: 0.084926
+  type: 'test'
+  ...
+# Subtest: operation smoke: prank_name
+ok 91 - operation smoke: prank_name
+  ---
+  duration_ms: 0.058563
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_slime
+ok 92 - operation smoke: boss_slime
+  ---
+  duration_ms: 0.14859
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_zombie
+ok 93 - operation smoke: boss_zombie
+  ---
+  duration_ms: 0.074444
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_skeleton
+ok 94 - operation smoke: boss_skeleton
+  ---
+  duration_ms: 0.048599
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_spider
+ok 95 - operation smoke: boss_spider
+  ---
+  duration_ms: 0.04595
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_witch
+ok 96 - operation smoke: boss_witch
+  ---
+  duration_ms: 0.043861
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_piglin
+ok 97 - operation smoke: boss_piglin
+  ---
+  duration_ms: 0.046589
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_evoker
+ok 98 - operation smoke: boss_evoker
+  ---
+  duration_ms: 0.046242
+  type: 'test'
+  ...
+# Subtest: operation smoke: boss_wither
+ok 99 - operation smoke: boss_wither
+  ---
+  duration_ms: 0.043212
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_hut
+ok 100 - operation smoke: structure_hut
+  ---
+  duration_ms: 0.567387
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_picnic
+ok 101 - operation smoke: structure_picnic
+  ---
+  duration_ms: 0.265094
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_treasure
+ok 102 - operation smoke: structure_treasure
+  ---
+  duration_ms: 0.126675
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_fountain
+ok 103 - operation smoke: structure_fountain
+  ---
+  duration_ms: 0.1555
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_obelisk
+ok 104 - operation smoke: structure_obelisk
+  ---
+  duration_ms: 0.095402
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_garden
+ok 105 - operation smoke: structure_garden
+  ---
+  duration_ms: 0.942053
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_watchtower
+ok 106 - operation smoke: structure_watchtower
+  ---
+  duration_ms: 0.170609
+  type: 'test'
+  ...
+# Subtest: operation smoke: structure_cage
+ok 107 - operation smoke: structure_cage
+  ---
+  duration_ms: 0.125936
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_horse
+ok 108 - operation smoke: ride_horse
+  ---
+  duration_ms: 0.126192
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_camel
+ok 109 - operation smoke: ride_camel
+  ---
+  duration_ms: 0.039111
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_pig
+ok 110 - operation smoke: ride_pig
+  ---
+  duration_ms: 0.040275
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_boat
+ok 111 - operation smoke: ride_boat
+  ---
+  duration_ms: 0.041915
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_minecart
+ok 112 - operation smoke: ride_minecart
+  ---
+  duration_ms: 0.064428
+  type: 'test'
+  ...
+# Subtest: operation smoke: ride_strider
+ok 113 - operation smoke: ride_strider
+  ---
+  duration_ms: 0.039539
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_chaos_shard
+ok 114 - operation smoke: collect_chaos_shard
+  ---
+  duration_ms: 0.057341
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_lucky_coin
+ok 115 - operation smoke: collect_lucky_coin
+  ---
+  duration_ms: 0.041543
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_meme_token
+ok 116 - operation smoke: collect_meme_token
+  ---
+  duration_ms: 0.032383
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_star_fragment
+ok 117 - operation smoke: collect_star_fragment
+  ---
+  duration_ms: 0.03124
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_prank_badge
+ok 118 - operation smoke: collect_prank_badge
+  ---
+  duration_ms: 0.032684
+  type: 'test'
+  ...
+# Subtest: operation smoke: collect_crown
+ok 119 - operation smoke: collect_crown
+  ---
+  duration_ms: 0.03069
+  type: 'test'
+  ...
+# Subtest: Friendship Swap never targets a distant player
+ok 120 - Friendship Swap never targets a distant player
+  ---
+  duration_ms: 0.278892
+  type: 'test'
+  ...
+# Subtest: Pass the Potato ignores other dimensions and distant players
+ok 121 - Pass the Potato ignores other dimensions and distant players
+  ---
+  duration_ms: 0.097523
+  type: 'test'
+  ...
+# Subtest: temporary terrain records survive reload and are removed after restoration
+ok 122 - temporary terrain records survive reload and are removed after restoration
+  ---
+  duration_ms: 0.778925
+  type: 'test'
+  ...
+# Subtest: journal refuses excess work before block edits
+ok 123 - journal refuses excess work before block edits
+  ---
+  duration_ms: 0.415295
+  type: 'test'
+  ...
+# Subtest: malformed journal entries are discarded without affecting valid entries
+ok 124 - malformed journal entries are discarded without affecting valid entries
+  ---
+  duration_ms: 0.548305
+  type: 'test'
+  ...
+# Subtest: temporary terrain does not overwrite a subsequent player edit
+ok 125 - temporary terrain does not overwrite a subsequent player edit
+  ---
+  duration_ms: 0.998191
+  type: 'test'
+  ...
+# Subtest: unchanged temporary terrain restores the original permutation
+ok 126 - unchanged temporary terrain restores the original permutation
+  ---
+  duration_ms: 0.268112
+  type: 'test'
+  ...
+# Subtest: containers and critical blocks are protected from terrain replacement
+ok 127 - containers and critical blocks are protected from terrain replacement
+  ---
+  duration_ms: 0.155933
+  type: 'test'
+  ...
+# Subtest: unloaded terrain retains its journal record for later recovery
+ok 128 - unloaded terrain retains its journal record for later recovery
+  ---
+  duration_ms: 0.27418
+  type: 'test'
+  ...
+# Subtest: journal write failure immediately rolls back temporary edits
+ok 129 - journal write failure immediately rolls back temporary edits
+  ---
+  duration_ms: 0.3608
+  type: 'test'
+  ...
+# Subtest: restoration requires the event block to still be present
+ok 130 - restoration requires the event block to still be present
+  ---
+  duration_ms: 0.126975
+  type: 'test'
+  ...
+# Subtest: overlapping temporary events never replace the original terrain snapshot
+ok 131 - overlapping temporary events never replace the original terrain snapshot
+  ---
+  duration_ms: 0.301396
+  type: 'test'
+  ...
+# Subtest: due-only journal recovery does not restore future records
+ok 132 - due-only journal recovery does not restore future records
+  ---
+  duration_ms: 0.199394
+  type: 'test'
+  ...
+# Subtest: temporary terrain records and honors a matching restore deadline
+ok 133 - temporary terrain records and honors a matching restore deadline
+  ---
+  duration_ms: 0.5649
+  type: 'test'
+  ...
+# Subtest: missing terrain targets are skipped without losing prior recovery records
+ok 134 - missing terrain targets are skipped without losing prior recovery records
+  ---
+  duration_ms: 0.383528
+  type: 'test'
+  ...
+1..134
+# tests 134
+# suites 0
+# pass 134
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1049.055896
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test:probability
+> node tools/probability-test.mjs 200000
+
+lucky: 200000 draws, 83 eligible, max |z|=2.492, chi2=62.91 (PASSED)
+super: 200000 draws, 89 eligible, max |z|=2.813, chi2=92.98 (PASSED)
+chaos: 200000 draws, 90 eligible, max |z|=2.237, chi2=76.18 (PASSED)
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 build
+> node tools/build.mjs
+
+BUILD dist/GGLuckyEasy-Behavior-v0.1.0-dev1.mcpack 29496 bytes sha256=a800b771e9409a1e3d7fefca342a5b5c4e9b71bb6f92622bacea2d7b95992081
+BUILD dist/GGLuckyEasy-Resources-v0.1.0-dev1.mcpack 30022 bytes sha256=f45ec708d6851dfb72af962951a941e5ef139e5c1066ad7bb05f6a711edce361
+BUILD dist/GGLuckyEasy-v0.1.0-dev1.mcaddon 55762 bytes sha256=d5fb08e5ca8f7e3fc43f401df79809b2595c03d887531a8ec5a97a82ac2e7c7e
+PASS mcaddon semantic inspection: two nested packs, manifests, dependencies, scripts, localization, sounds, CRC valid
+
+> ggluckyeasy-lucky-chaos@0.1.0-dev1 test:reproducibility
+> node tools/reproducibility-test.mjs
+
+REPRODUCIBILITY PASS: two builds have identical artifact hashes

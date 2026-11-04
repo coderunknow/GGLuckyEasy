@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.30",
+  "minecraft:item": {
+    "description": {
+      "identifier": "luckychaos:chaos_crown",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "luckychaos_chaos_crown",
+      "minecraft:display_name": {
+        "value": "item.luckychaos:chaos_crown.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": false
+    }
+  }
+}

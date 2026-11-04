@@ -1,0 +1,8 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "luckychaos.open.lucky": { "category": "block", "sounds": [{ "name": "sounds/luckychaos/lucky", "volume": 0.8 }] },
+    "luckychaos.open.super": { "category": "block", "sounds": [{ "name": "sounds/luckychaos/super", "volume": 0.8 }] },
+    "luckychaos.open.chaos": { "category": "block", "sounds": [{ "name": "sounds/luckychaos/chaos", "volume": 0.45 }] }
+  }
+}

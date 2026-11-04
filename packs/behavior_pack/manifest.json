@@ -1,0 +1,65 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "GGLuckyEasy Behavior Pack",
+    "description": "GGLuckyEasy v0.1.0-dev1 \u2014 events, progression, and server-authoritative gameplay",
+    "uuid": "a82bb565-5d87-5fba-ba0c-6452a04918e9",
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      30
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "0986364b-3c43-5746-acfe-4fc155e972e1",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "7f3996ed-83be-53ef-8849-8d7a4e892c0b",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "3e48e156-e274-5724-9d24-70580556dec4",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.8.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.1.0"
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "GGLuckyEasy"
+    ],
+    "license": "Apache-2.0",
+    "product_type": "addon"
+  }
+}
